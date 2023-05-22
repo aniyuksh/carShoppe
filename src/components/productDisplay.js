@@ -1,0 +1,64 @@
+import React, { useState } from "react";
+import { Sidebar } from "./sidebar";
+
+import SingleProduct from "./SingleProduct";
+import { useProductContext } from "../context/ProductContext";
+import {useFilterContext} from "../context/FilterContext";
+import {sortByPriceFunction , applyFilter} from "../context/utilityFunctions/filterUtility";
+export const ProductDisplay = () => {
+
+const {productData} = useProductContext();
+const [showSideBar, setShowSideBar] = useState(false);
+const { state } = useFilterContext();
+
+
+ function sideNavHandler(){
+    setShowSideBar((prev)=>!prev)
+ }
+ console.log("STATE" , state);
+ const {
+    filterSearch,
+    filterCategory,
+    filterFuel,
+    filterBrand,
+    filterRating,
+    filterPriceRange,
+    filterByPrice,
+ } = state;
+
+ let sortedData = sortByPriceFunction(productData , filterByPrice)
+ let appliedFilterData = applyFilter(
+    sortedData,
+    filterSearch,
+    filterCategory,
+    filterFuel,
+    filterBrand,
+    filterRating,
+    filterPriceRange,
+ )
+
+  return (
+    <div className="flex flex-col md:w-full  sm:flex-row">
+      
+      
+     <section className="flex flex-col  sm:flex-row">
+
+     <section className={showSideBar ? 'justify-self-center self-center bottom-9 bg-white opacity-90 w-[100%] justify-center flex sticky top-20 z-1 my-2 mr-6 ml-4 overflow-y-scroll' : 'hidden sm:flex sticky h-full justify-between top-0 left-0 mr-10 '}>  
+        <Sidebar /> 
+      </section>
+     
+
+
+      <main className="grid grid-cols-1 gap-6 max-sm:w-[70%] max-sm:mx-auto sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mr-5">
+        {
+          appliedFilterData?.map((car)=>(
+            <SingleProduct product={car}/>
+          ))  
+        }
+      </main>
+     
+     </section>
+     <button className="sm:hidden bg-white flex justify-self-center self-center sticky z-10  bottom-0 w-[100%] justify-center text-xl font-bold text-center items-center mx-auto opacity-80" onClick={sideNavHandler}>Filters</button>
+    </div>  
+  );
+};
