@@ -1,18 +1,21 @@
 import axios from 'axios'
-import React, { useEffect , useState ,createContext, useContext} from 'react'
-
+import React, { useEffect ,createContext, useContext, useReducer} from 'react'
+import {  productReducer , initialState } from '../reducer/ProductReducer';
 
 export const DataContext = createContext();
 
 const ProductContext = ({children}) => {
-    const [productData , setProductData] = useState(null);
-    const [categoryData , setCategoryData] = useState(null);
+    // const [productData , setProductData] = useState(null);
+    // const [categoryData , setCategoryData] = useState(null);
     
+    const [state , dispatch] = useReducer( productReducer , initialState);
     const getData = async() =>{
         try{
             const result = await axios.get('/api/products');
             if(result?.status === 200){
-                setProductData(result?.data?.products)
+                console.log("setProductData" ,  result?.data?.products)
+                dispatch({type : "setProductData" , payload: result?.data?.products})
+                // setProductData(result?.data?.products)
             }
         }
         catch(e){
@@ -24,7 +27,8 @@ const ProductContext = ({children}) => {
         try{
             const result = await axios.get('/api/categories');
             if(result.status === 200) {
-                setCategoryData(result?.data?.categories);
+                // setCategoryData(result?.data?.categories);
+                dispatch({type : "setCategoryData" , payload : result?.data?.categories})
             }
         }
         catch(e){
@@ -35,9 +39,9 @@ const ProductContext = ({children}) => {
         getData();
         getCategoryData();
     },[])
-    
+    console.log("contextState" , state)
   return (
-    <DataContext.Provider value={{productData , categoryData}}>
+    <DataContext.Provider value={{productStateData : state}}>
         {children}
     </DataContext.Provider>
   )
