@@ -5,10 +5,15 @@ import { useFilterContext } from "../context/FilterContext";
 const Brands = ["Suzuki", "Tata", "Hyundai", "Skoda"];
 
 export const Sidebar = () => {
-  const { categoryData } = useProductContext();
+  const { productStateData } = useProductContext();
   const { state, dispatch } = useFilterContext();
   const [isFilterToggle, setFilterToggle] = useState(false);
 
+  let  {categoryData}  = productStateData
+  let categoryMapData = (categoryData.flat(1))
+  
+
+  
   function filterToggleHandler() {
     setFilterToggle((prev) => !prev);
   }
@@ -55,9 +60,11 @@ export const Sidebar = () => {
     }
   }
 
+  
   return (
-
+    
     <aside className="text-zinc-700 h-[40%] sticky justify-between top-0 left-0 y overflow-y-scroll min-w-[16rem] max-w-[24rem] py-2 px-2">
+     
       <section className="flex justify-between">
         <h2 className="text-lg">
           <span className="font-semibold">Apply</span>
@@ -76,7 +83,7 @@ export const Sidebar = () => {
           type="range"
           min={10000}
           max={2200000}
-          step={10000}
+          step={100000}
           defaultValue={state.filterPriceRange}
           onChange={(e) =>
             dispatch({ type: "filterPrice", payload: e.target.value })
@@ -86,12 +93,13 @@ export const Sidebar = () => {
 
       <section className="flex flex-col items-start border-b-2 border-gray-300 py-2 mb-4">
         <h2 className="text-lg font-semibold mb-3">Categories</h2>
-        {categoryData?.map((category) => {
+        {categoryMapData?.map((category) => {
+          // console.log(1);
           return (
             <div className="flex pb-1">
               <input
                 type="checkbox"
-                checked={state.filterCategory}
+                // checked={state.filterCategory}
                 value={category.categoryName}
                 id={category.categoryName}
                 name="category"
@@ -111,7 +119,7 @@ export const Sidebar = () => {
             value="Petrol"
             name="fuel"
             className="mr-2"
-            checked={state.filterCategory}
+            // checked={state.filterCategory}
             onChange={(e) => dispatch(fuelHandler(e))}
           />
           <label>Petrol</label>
@@ -122,7 +130,7 @@ export const Sidebar = () => {
             value="Diesel"
             name="fuel"
             className="mr-2"
-            checked={state.filterCategory}
+            // checked={state.filterCategory}
             onChange={(e) => dispatch(fuelHandler(e))}
           />
           <label>Diesel</label>
@@ -133,7 +141,7 @@ export const Sidebar = () => {
             value="cng"
             name="fuel"
             className="mr-2"
-            checked={state.filterCategory}
+            // checked={state.filterCategory}
             onChange={(e) => dispatch(fuelHandler(e))}
           />
           <label>Cng</label>
@@ -153,7 +161,7 @@ export const Sidebar = () => {
                 id={brand}
                 name="brand"
                 className="mr-2"
-                checked={state.filterBrand}
+                // checked={state.filterBrand}
                 onChange={(e) => dispatch(brandHandler(e))}
               />
               {brand}

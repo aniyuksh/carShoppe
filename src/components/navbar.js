@@ -22,7 +22,7 @@ if(searchOpen){
 }
 console.log(navOpen)
   return (
-    <div className='flex justify-between items-center h-12 max-w-[1980px] px-1 mx-auto text-zinc-600 sticky top-0 bg-white z-10' >
+    <div className='flex justify-between items-center h-12 max-w-[1980px] px-1 mx-auto text-zinc-600 sticky top-0 bg-white z-10 backdrop-filter backdrop-blur-lg bg-opacity-30' >
         <h1 className='text-3xl font-semibold'>carShoppe</h1>
         <input type="text" placeholder='Search Items...' onChange={(e) => dispatch({type : "filterSearch" , payload : e.target.value })}
         className={a} />
