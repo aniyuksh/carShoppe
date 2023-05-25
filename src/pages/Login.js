@@ -16,24 +16,7 @@ export const Login = () => {
     password : ""
   })
   const {email, password} = users[0];
-  // console.log("type" , typeof email)
-
-  // async function loginHandler(e) {
-  //   try{
-      
-  //   }
-  //   catch(e){
-  //     alert(e);
-  //   }
-  // }
-
-
-
-  // const loginServices = async (email, password) =>
-  // await axios.post('/api/auth/login', {
-  //   email,
-  //   password,
-  // });
+  
 
   // async function testLoginHandler(e){
   //   const {email , password} = e;
@@ -99,25 +82,14 @@ export const Login = () => {
       // });
       const res = await axios.post("/api/auth/login" , {email , password})
       console.log("res" , res);
-      // if(res.statusText === "OK"){
-      //   authDispatch({type : "User-pass" , payload : res?.data?.foundUser})
-      //   localStorage.setItem("token" , res.data.encodedToken)
-      //   localStorage.setItem("user", JSON.stringify(res?.data.foundUser));
-      //   console.log("succccccccccccccc");
-      // }
+      if(res.statusText === "OK"){
+        authDispatch({type : "User-pass" , payload : res?.data?.foundUser})
+        localStorage.setItem("token" , res.data.encodedToken)
+        localStorage.setItem("user", JSON.stringify(res?.data.foundUser));
+        console.log("succccccccccccccc");
+      }
     }
 
-    // try{
-      // const res = await axios.post("/api/auth/login",{
-      //  email , password
-      // })
-      // if(res.statusText === "OK"){
-      //   authDispatch({type : "User-pass" , payload : res?.data?.foundUser})
-      //   localStorage.setItem("token" , res.data.encodedToken)
-      //   localStorage.setItem("user", JSON.stringify(res?.data.foundUser));
-      // }
-      // console.log("res",res);
-    // }
     catch(e){
       console.log(e);
       authDispatch({type : "User-fail" })

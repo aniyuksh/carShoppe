@@ -83,7 +83,7 @@ export const Sidebar = () => {
           type="range"
           min={10000}
           max={2200000}
-          step={100000}
+          step={50000}
           defaultValue={state.filterPriceRange}
           onChange={(e) =>
             dispatch({ type: "filterPrice", payload: e.target.value })
