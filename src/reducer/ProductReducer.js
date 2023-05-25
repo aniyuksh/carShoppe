@@ -1,17 +1,23 @@
-import React , {useReducer} from 'react'
 
-
-export const initialState = {
-    filters: {
-        categories : {},
-        
-    }
+const initialState = {
+   categoryData : [],
+   productData : []
 }
 
-const ProductReducer = () => {
-  return (
-    <div>ProductReducer</div>
-  )
+const productReducer = (state , action ) => {
+  switch (action.type) {
+    case "setProductData" : 
+    return {
+      ...state , 
+      productData : [...state.productData , action.payload],
+  }
+  case "setCategoryData" : 
+    return {
+      ...state , 
+      categoryData : [...state.categoryData , action.payload],
+  }
+
+  }
 }
 
-export default ProductReducer
+export { productReducer, initialState}

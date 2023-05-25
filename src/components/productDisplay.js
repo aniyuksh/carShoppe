@@ -7,15 +7,15 @@ import {useFilterContext} from "../context/FilterContext";
 import {sortByPriceFunction , applyFilter} from "../context/utilityFunctions/filterUtility";
 export const ProductDisplay = () => {
 
-const {productData} = useProductContext();
+const {productStateData} = useProductContext();
 const [showSideBar, setShowSideBar] = useState(false);
 const { state } = useFilterContext();
-
+// console.log("productStateData" , ...productStateData.productData)
 
  function sideNavHandler(){
     setShowSideBar((prev)=>!prev)
  }
- console.log("STATE" , state);
+//  console.log("STATE" , state);
  const {
     filterSearch,
     filterCategory,
@@ -26,7 +26,10 @@ const { state } = useFilterContext();
     filterByPrice,
  } = state;
 
- let sortedData = sortByPriceFunction(productData , filterByPrice)
+ let sortedData = sortByPriceFunction(...productStateData.productData , filterByPrice)
+ console.log(
+  "sorted" , sortedData
+ )
  let appliedFilterData = applyFilter(
     sortedData,
     filterSearch,
@@ -35,6 +38,9 @@ const { state } = useFilterContext();
     filterBrand,
     filterRating,
     filterPriceRange,
+ )
+ console.log(
+  "appliedFilterData" , appliedFilterData
  )
 
   return (
@@ -51,7 +57,7 @@ const { state } = useFilterContext();
 
       <main className="grid grid-cols-1 gap-6 max-sm:w-[70%] max-sm:mx-auto sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mr-5">
         {
-          appliedFilterData?.map((car)=>(
+          appliedFilterData && appliedFilterData?.map((car)=>(
             <SingleProduct product={car}/>
           ))  
         }

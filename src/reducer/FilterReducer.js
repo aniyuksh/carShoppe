@@ -5,7 +5,7 @@ const initialState = {
     filterFuel : [],
     filterBrand : [],
     filterRating : null,
-    filterPriceRange : "2200000",
+    filterPriceRange : 2200000,
     filterByPrice : "",
     
 }
@@ -52,7 +52,7 @@ const filterReducer = (state, action) => {
         case "filterPrice" : 
             return {
                 ...state , 
-                filterPrice : action.payload,
+                filterPriceRange : action.payload,
             }
         
 
