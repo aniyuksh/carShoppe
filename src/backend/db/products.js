@@ -15,7 +15,7 @@ import nexon from "../../assets/card-images/nexon.jpg";
 
 export const products = [
   {
-    _id: uuid(),
+    _id: "p1",
     brand: "Suzuki",
     model: "Wagon R",
     price: "50000",
@@ -28,7 +28,7 @@ export const products = [
     url : wagon,
   },
   {
-    _id: uuid(),
+    _id: "p2",
     brand: "Suzuki",
     model: "Swift Dzire",
     price: "700000",
@@ -41,7 +41,7 @@ export const products = [
     url : dzire1,
   },
   {
-    _id: uuid(),
+    _id: "p3",
     brand: "Tata",
     model: "Nexon",
     price: "900000",
@@ -55,7 +55,7 @@ export const products = [
     
   },
   {
-    _id: uuid(),
+    _id: "p4",
     brand: "Suzuki",
     model: "Swift",
     price: "90000",
@@ -68,7 +68,7 @@ export const products = [
     url : wagon,
   },
   {
-    _id: uuid(),
+    _id: "p5",
     brand: "Tata",
     model: "Tigor",
     price: "800000",
@@ -81,7 +81,7 @@ export const products = [
     url : dzire,
   },
   {
-    _id: uuid(),
+    _id: "p6",
     brand: "Hyundai",
     model: "Creta",
     price: "100000",
@@ -94,7 +94,7 @@ export const products = [
     url : nexon,
   },
   {
-    _id: uuid(),
+    _id: "p7",
     brand: "Suzuki",
     model: "Baleno",
     price: "700000",
@@ -107,7 +107,7 @@ export const products = [
     url : wagon,
   },
   {
-    _id: uuid(),
+    _id: "p8",
     brand: "Hyundai",
     model: "Aura",
     price: "70000",
@@ -120,7 +120,7 @@ export const products = [
     url : dzire,
   },
   {
-    _id: uuid(),
+    _id: "p9",
     brand: "Tata",
     model: "Punch",
     price: "500000",
@@ -133,7 +133,7 @@ export const products = [
     url : nexon
   },
   {
-    _id: uuid(),
+    _id: "p10",
     brand: "Suzuki",
     model: "Alto 800",
     price: "20000",
@@ -146,7 +146,7 @@ export const products = [
     url : wagon
   },
   {
-    _id: uuid(),
+    _id: "p11",
     brand: "Honda",
     model: "Amaze",
     price: "1000000",
@@ -159,7 +159,7 @@ export const products = [
     url : dzire
   },
   {
-    _id: uuid(),
+    _id: "p12",
     brand: "Hyundai",
     model: "Venue",
     price: "100000",
@@ -172,7 +172,7 @@ export const products = [
     url : nexon
   },
   {
-    _id: uuid(),
+    _id: "p13",
     brand: "Hyundai",
     model: "i20",
     price: "500000",
@@ -185,7 +185,7 @@ export const products = [
     url : wagon
   },
   {
-    _id: uuid(),
+    _id: "p14",
     brand: "Skoda",
     model: "Slavia",
     price: "1500000",
@@ -198,7 +198,7 @@ export const products = [
     url : dzire
   },
   {
-    _id: uuid(),
+    _id: "p15",
     brand: "Tata",
     model: "Harrier",
     price: "2200000",

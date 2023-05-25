@@ -1,11 +1,20 @@
 import React from 'react'
 import {GiVibratingShield} from "react-icons/gi"
 import {BsBookmarkPlus} from "react-icons/bs"
+import { useNavigate , Link } from 'react-router-dom'
 const SingleProduct = ({product}) => {
+    const navigate = useNavigate();
+
+    function pageNavigator(id){
+        console.log("clciked" , id);
+        navigate(`/single/${id}`)
+    }
+
   return (
     <div key={product._id}
     className='flex flex-col rounded my-5 h-[230px] bg-gray-100 text max-sm:pb-2 text-zinc-800 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]
     '
+    onClick={()=>pageNavigator(product._id)}
     >
         <div className='object-contain bg-gray-100 '>
             <img src={product.url} alt="" className='w-[100%] '/>

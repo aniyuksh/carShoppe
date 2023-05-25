@@ -10,6 +10,7 @@ import { Login } from "./pages/Login";
 import Signup from "./pages/Signup";
 import Mockman from "mockman-js"
 import ProductContext from "./context/ProductContext";
+import SingleProduct from "./pages/SingleProduct";
 makeServer();
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/productDisplay" element={<ProductDisplay />}/>
         <Route path="/mockman" element={<Mockman />}/>
+        <Route path="/single/:id" element={<SingleProduct />}/>
 
       </Routes>
     </div>
