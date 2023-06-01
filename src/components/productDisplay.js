@@ -5,6 +5,7 @@ import SingleProduct from "./SingleProduct";
 import { useProductContext } from "../context/ProductContext";
 import {useFilterContext} from "../context/FilterContext";
 import {sortByPriceFunction , applyFilter} from "../context/utilityFunctions/filterUtility";
+import Navbar from "./navbar";
 export const ProductDisplay = () => {
 
 const {productStateData} = useProductContext();
@@ -27,9 +28,9 @@ const { state } = useFilterContext();
  } = state;
 
  let sortedData = sortByPriceFunction(...productStateData.productData , filterByPrice)
- console.log(
-  "sorted" , sortedData
- )
+//  console.log(
+//   "sorted" , sortedData
+//  )
  let appliedFilterData = applyFilter(
     sortedData,
     filterSearch,
@@ -39,12 +40,14 @@ const { state } = useFilterContext();
     filterRating,
     filterPriceRange,
  )
- console.log(
-  "appliedFilterData" , appliedFilterData
- )
+//  console.log(
+//   "appliedFilterData" , appliedFilterData
+//  )
 
   return (
-    <div className="flex flex-col md:w-full  sm:flex-row">
+    <>
+    <Navbar />
+        <div className="flex flex-col md:w-full  sm:flex-row">
       
       
      <section className="flex flex-col  sm:flex-row">
@@ -66,5 +69,7 @@ const { state } = useFilterContext();
      </section>
      <button className="sm:hidden bg-white flex justify-self-center self-center sticky z-10  bottom-0 w-[100%] justify-center text-xl font-bold text-center items-center mx-auto opacity-80" onClick={sideNavHandler}>Filters</button>
     </div>  
+    </>
+
   );
 };

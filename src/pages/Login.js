@@ -1,5 +1,5 @@
 import axios from "axios";
-import React , {useState} from "react";
+import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import back from "../assets/hero-images/back.svg";
 import smlogin from "../assets/hero-images/smlogin.svg";
@@ -7,37 +7,35 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { users } from "../backend/db/users";
 
-
 export const Login = () => {
   const { authDispatch } = useAuth();
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
-    email : "" ,
-    password : ""
-  })
-  const {email, password} = users[0];
-  
+    email: "",
+    password: "",
+  });
+  const { email, password } = users[0];
 
   // async function testLoginHandler(e){
   //   const {email , password} = e;
   //   e.preventDefault();
   //   console.log("came")
   //  try{
-      // const res = await axios.post("/api/auth/login", { email, password })
-      // console.log(res);
-      // if(res?.status === 200 || res?.status === 201){
-        // authDispatch({type : "User-pass" , payload : res?.data?.foundUser})
-        // localStorage.setItem("token", res?.data?.encodedToken);
-        // localStorage.setItem("user", JSON.stringify(res?.data.foundUser));
-        // navigate(-1);
-        // console.log("succccccccc");
-        // const res = await loginServices('adarshbalak@gmail.com', 'adarshBalaki123');
-        // console.log("res",res)
-      // }
+  // const res = await axios.post("/api/auth/login", { email, password })
+  // console.log(res);
+  // if(res?.status === 200 || res?.status === 201){
+  // authDispatch({type : "User-pass" , payload : res?.data?.foundUser})
+  // localStorage.setItem("token", res?.data?.encodedToken);
+  // localStorage.setItem("user", JSON.stringify(res?.data.foundUser));
+  // navigate(-1);
+  // console.log("succccccccc");
+  // const res = await loginServices('adarshbalak@gmail.com', 'adarshBalaki123');
+  // console.log("res",res)
+  // }
   //  }
   //  catch(e){
-    // alert(e);
-    // authDispatch({ type : "User-fail" });
+  // alert(e);
+  // authDispatch({ type : "User-fail" });
   //  }
   // }
 
@@ -49,54 +47,59 @@ export const Login = () => {
   //   console.log(res);
   // }
 
-  async function testLoginHandler(e , email , password){
+  async function testLoginHandler(e) {
     e.preventDefault();
-    try{
-      const res = await axios.post("/api/auth/login" , {
-        email , password
+    try {
+      // const res = await axios.post("/api/auth/login" , {
+      //   email: "adarshbalika@gmail.com",
+      //   password: "adarshbalika",
+      // });
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email: "adarshbalika@gmail.com",
+          password: "adarshbalika",
+        }),
       });
-      console.log("res" , res)
-      if(res.statusText === "OK"){
-        authDispatch({type : "User-pass" , payload : res?.data?.foundUser})
-        localStorage.setItem("token" , res.data.encodedToken)
-        localStorage.setItem("user", JSON.stringify(res?.data.foundUser));
-        console.log("succccccccccccccc");
+      const nres = await res.json();
+      if (res.statusText === "OK") {
+        authDispatch({ type: "User-pass", payload: nres?.foundUser });
+        localStorage.setItem("token", nres.encodedToken);
+        localStorage.setItem("user", JSON.stringify(nres?.foundUser));
+        // console.log("succccccccccccccc");
+        navigate("/productDisplay");
       }
-    }
-    catch(e){
+    } catch (e) {
       alert(e);
-      authDispatch({ type : "User-fail" });
+      authDispatch({ type: "User-fail" });
     }
   }
 
-  async function loginHandler(e){
+  async function loginHandler(e) {
     // console.log("Came");
-    const {email , password} = loginData;
+    const { email, password } = loginData;
     // console.log("logindata" , loginData);
     e.preventDefault();
-    try{
-      const n = {email : email , password : password}
+    try {
+      const n = { email: email, password: password };
       // const res = await fetch("/api/auth/login" , {
       //   method : "POST",
       //   body : JSON.stringify(n)
       // });
-      const res = await axios.post("/api/auth/login" , {email , password})
-      console.log("res" , res);
-      if(res.statusText === "OK"){
-        authDispatch({type : "User-pass" , payload : res?.data?.foundUser})
-        localStorage.setItem("token" , res.data.encodedToken)
+      const res = await axios.post("/api/auth/login", { email, password });
+      // console.log("res" , res);
+      if (res.statusText === "OK") {
+        authDispatch({ type: "User-pass", payload: res?.data?.foundUser });
+        localStorage.setItem("token", res.data.encodedToken);
         localStorage.setItem("user", JSON.stringify(res?.data.foundUser));
-        console.log("succccccccccccccc");
+        // console.log("succccccccccccccc");
+        navigate("/productDisplay");
       }
-    }
-
-    catch(e){
+    } catch (e) {
       console.log(e);
-      authDispatch({type : "User-fail" })
+      authDispatch({ type: "User-fail" });
     }
-
   }
-
 
   return (
     <>
@@ -126,12 +129,13 @@ export const Login = () => {
                   type="text"
                   className="rounded-md py-1 px-1"
                   placeholder="Email"
-                  name = "email"
-                  value= {loginData.email}
+                  name="email"
+                  value={loginData.email}
                   // onChange={(e)=>setLoginData((prev)=>{ ...prev, email : e.target.value})}
-                  onChange={(e)=>setLoginData((prev)=>{
-                    return ({...prev , email : e.target.value})
-                  })
+                  onChange={(e) =>
+                    setLoginData((prev) => {
+                      return { ...prev, email: e.target.value };
+                    })
                   }
                 />
               </div>
@@ -140,31 +144,39 @@ export const Login = () => {
                   type="text"
                   className="rounded-md py-1 px-1"
                   placeholder="Password"
-                  name = "password"
-                  value = {loginData.password}
+                  name="password"
+                  value={loginData.password}
                   // onChange={(e)=>setLoginData((prev)=>{...prev, password : e.target.value})}
                   // onChange={(e)=>setLoginData((prev)=>{
                   //   return ({...prev , password : e.target.value})
                   // })
-                  onChange={(e)=>setLoginData((prev)=>{
-                    return (
-                      {...prev , password : e.target.value}
-                    )
-                  })}
+                  onChange={(e) =>
+                    setLoginData((prev) => {
+                      return { ...prev, password: e.target.value };
+                    })
+                  }
                 />
               </div>
               <div className="flex justify-start py-3">
-                <button type="submit" className="px-3 py-1 rounded-lg border border-gray-100 text-white">
+                <button
+                  type="submit"
+                  className="px-3 py-1 rounded-lg border border-gray-100 text-white"
+                >
                   Login
                 </button>
-                <button className="px-3 py-1 rounded-lg border border-gray-100 text-white" 
-                onClick={(e)=>testLoginHandler(e , email , password)}
+                <button
+                  className="px-3 py-1 rounded-lg border border-gray-100 text-white"
+                  onClick={(e) => testLoginHandler(e, email, password)}
                 >
                   Login as Guest
                 </button>
-                
               </div>
-              <p>Dont have an account? <span><NavLink>Signup</NavLink></span></p>
+              <p className="text-white">
+                Dont have an account?{" "}
+                <span>
+                  <NavLink to="/signup">Signup</NavLink>
+                </span>
+              </p>
             </div>
           </form>
         </div>

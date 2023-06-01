@@ -6,51 +6,48 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import axios from "axios";
 const Signup = () => {
-    
-    // const navigate = useNavigate();
-    const { authDispatch} = useAuth();
-    const navigate = useNavigate();
-    const [signUpData, setSignUpData] = useState({
-        name: "",
-        mobile: "",
-        email: "",
-        date : "",
-        password: "",
-      });
+  // const navigate = useNavigate();
+  const { authDispatch } = useAuth();
+  const navigate = useNavigate();
+  const [signUpData, setSignUpData] = useState({
+    name: "",
+    mobile: "",
+    email: "",
+    date: "",
+    password: "",
+  });
 
-    
-    async function postSignUpData(e){
-        const {name , mobile , email , date, password} = signUpData;
-        try{
-            e.preventDefault();
-            if(name && mobile && email && date && password !== ""){
-
-                const resp = await axios.post("/api/auth/signup" , signUpData)
-                if(resp.status === 200 || resp.status === 201){
-                    localStorage.setItem("login" , JSON.stringify({
-                        user : resp?.data?.createdUser,
-                        token : resp?.data?.encodedToken
-                    }));
-                    authDispatch( { type : "User-pass" , payload : resp?.data?.createdUser})
-                    localStorage.setItem("token", resp?.data?.encodedToken);
-                    // localStorage.setItem("user", resp?.data?.createdUser);
-                    // navigate("/");
-                }
-                
-                    // localStorage.setItem("login" , data.createdUser);
-                    // console.log(localStorage.getItem("login" , data.encodedToken));
-                    // console.log();
-            }
-            else{
-
-                alert("Enter valid Data")
-            }
-            
+  async function postSignUpData(e) {
+    const { name, mobile, email, date, password } = signUpData;
+    try {
+      e.preventDefault();
+      if (name && mobile && email && date && password !== "") {
+        const resp = await axios.post("/api/auth/signup", signUpData);
+        if (resp.status === 200 || resp.status === 201) {
+          localStorage.setItem(
+            "login",
+            JSON.stringify({
+              user: resp?.data?.createdUser,
+              token: resp?.data?.encodedToken,
+            })
+          );
+          authDispatch({ type: "User-pass", payload: resp?.data?.createdUser });
+          localStorage.setItem("token", resp?.data?.encodedToken);
+          navigate("/login");
+          // localStorage.setItem("user", resp?.data?.createdUser);
+          // navigate("/");
         }
-        catch(e){
-            alert(e);
-        }
+
+        // localStorage.setItem("login" , data.createdUser);
+        // console.log(localStorage.getItem("login" , data.encodedToken));
+        // console.log();
+      } else {
+        alert("Enter valid Data");
+      }
+    } catch (e) {
+      alert(e);
     }
+  }
 
   return (
     <>
@@ -80,11 +77,13 @@ const Signup = () => {
                 type="text"
                 className="rounded-md py-1 px-1"
                 placeholder="Name"
-                name = "name"
-                value = {signUpData.name}
-                onChange={(e)=> setSignUpData((prev)=> {
-                    return { ...prev , name : e.target.value}
-                })}
+                name="name"
+                value={signUpData.name}
+                onChange={(e) =>
+                  setSignUpData((prev) => {
+                    return { ...prev, name: e.target.value };
+                  })
+                }
               />
             </div>
             <div className="flex py-3 ">
@@ -92,11 +91,13 @@ const Signup = () => {
                 type="text"
                 className="rounded-md py-1 px-1"
                 placeholder="Email"
-                name = "email"
-                value = {signUpData.email}
-                onChange={(e)=> setSignUpData((prev)=> {
-                    return { ...prev , email : e.target.value}
-                })}
+                name="email"
+                value={signUpData.email}
+                onChange={(e) =>
+                  setSignUpData((prev) => {
+                    return { ...prev, email: e.target.value };
+                  })
+                }
               />
             </div>
             <div className="flex py-3 ">
@@ -104,23 +105,26 @@ const Signup = () => {
                 type="text"
                 className="rounded-md py-1 px-1"
                 placeholder="Mobile Number"
-                name = "mobile"
-                value = {signUpData.mobile}
-                onChange={(e)=> setSignUpData((prev)=> {
-                    return { ...prev , mobile : e.target.value}
-                })}
+                name="mobile"
+                value={signUpData.mobile}
+                onChange={(e) =>
+                  setSignUpData((prev) => {
+                    return { ...prev, mobile: e.target.value };
+                  })
+                }
               />
             </div>
             <div className="flex py-3 ">
               <input
                 type="date"
                 className="rounded-md py-1 px-1 text-black"
-                name = "date"
-                value= {signUpData.date}
-                onChange={(e)=> setSignUpData((prev)=> {
-                    return { ...prev , date : e.target.value}
-                })}
-                
+                name="date"
+                value={signUpData.date}
+                onChange={(e) =>
+                  setSignUpData((prev) => {
+                    return { ...prev, date: e.target.value };
+                  })
+                }
               />
             </div>
             <div className="flex py-3 ">
@@ -128,11 +132,13 @@ const Signup = () => {
                 type="password"
                 className="rounded-md py-1 px-1"
                 placeholder="Password"
-                name = "password"
+                name="password"
                 value={signUpData.password}
-                onChange={(e)=> setSignUpData((prev)=> {
-                    return { ...prev , password : e.target.value}
-                })}
+                onChange={(e) =>
+                  setSignUpData((prev) => {
+                    return { ...prev, password: e.target.value };
+                  })
+                }
               />
             </div>
             <div className="flex justify-start py-3">
@@ -140,7 +146,12 @@ const Signup = () => {
                 SignUp
               </button>
             </div>
-            <p className="text-zinc-50">Have an Account? <Link to="/login"><span>Login</span></Link></p>
+            <p className="text-zinc-50">
+              Have an Account?{" "}
+              <Link to="/login">
+                <span>Login</span>
+              </Link>
+            </p>
           </div>
         </form>
       </div>

@@ -12,6 +12,7 @@ import { formatDate, requiresAuth } from "../utils/authUtils";
  * send GET Request at /api/user/cart
  * */
 export const getCartItemsHandler = function (schema, request) {
+  // console.log("entered");
   const userId = requiresAuth.call(this, request);
   if (!userId) {
     return new Response(
@@ -23,6 +24,7 @@ export const getCartItemsHandler = function (schema, request) {
     );
   }
   const userCart = schema.users.findBy({ _id: userId }).cart;
+  // console.log("USERCART", userCart);
   return new Response(200, {}, { cart: userCart });
 };
 
@@ -46,6 +48,7 @@ export const addItemToCartHandler = function (schema, request) {
     }
     const userCart = schema.users.findBy({ _id: userId }).cart;
     const { product } = JSON.parse(request.requestBody);
+    // console.log("product cart controller" , product);
     userCart.push({
       ...product,
       createdAt: formatDate(),
@@ -106,7 +109,9 @@ export const removeItemFromCartHandler = function (schema, request) {
 
 export const updateCartItemHandler = function (schema, request) {
   const productId = request.params.productId;
+  // console.log("PRODUCTID", typeof productId);
   const userId = requiresAuth.call(this, request);
+  // console.log("USERID",userId)
   try {
     if (!userId) {
       return new Response(

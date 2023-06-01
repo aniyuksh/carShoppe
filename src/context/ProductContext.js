@@ -13,7 +13,7 @@ const ProductContext = ({children}) => {
         try{
             const result = await axios.get('/api/products');
             if(result?.status === 200){
-                console.log("setProductData" ,  result?.data?.products)
+                
                 dispatch({type : "setProductData" , payload: result?.data?.products})
                 // setProductData(result?.data?.products)
             }
@@ -39,7 +39,7 @@ const ProductContext = ({children}) => {
         getData();
         getCategoryData();
     },[])
-    console.log("contextState" , state)
+    // console.log("contextState" , state)
   return (
     <DataContext.Provider value={{productStateData : state}}>
         {children}

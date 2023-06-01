@@ -21,7 +21,7 @@ function applyFilter(
     
     if(filterSearch.length !== 0){
         
-       product =  product?.filter((car)=>car.model.toLowerCase() === filterSearch.trim().toLowerCase() || car.brand.toLowerCase() === filterSearch.trim().toLowerCase())
+       product =  product?.filter((car)=>car.model.toLowerCase().includes(filterSearch.trim().toLowerCase())|| car.brand.toLowerCase().includes( filterSearch.trim().toLowerCase()))
     
     }
 
