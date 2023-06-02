@@ -28,7 +28,7 @@ const Landing = () => {
       </div>
       <div className="flex flex-col">
         <div className="py-4">
-          <p className="text-4xl text-zinc-700 font-bold"> Category:</p>
+          <p className="text-4xl text-zinc-700 font-bold"> Categories </p>
         </div>
         <div className="flex justify-evenly my-5 max-sm:flex-col max-sm:justify-center items-center">
           {categories.map((category) => {

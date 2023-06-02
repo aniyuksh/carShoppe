@@ -5,7 +5,12 @@ const Profile = () => {
   return (
     <div>
       <Navbar />
-      <section></section>
+      <section>
+        <div className="border border-gray-500 inline-block">
+          <button>Profile</button>
+          <button>Address</button>
+        </div>
+      </section>
     </div>
   );
 };

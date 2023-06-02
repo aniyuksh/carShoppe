@@ -82,7 +82,7 @@ const Cart = () => {
             "
               >
                 <div className="">
-                  <img src={item.url} />
+                  <img src={item.url} className=" w-[500px]" />
                 </div>
                 <div className="flex flex-col">
                   <div className="flex justify-between mx-2 text-lg my-1">

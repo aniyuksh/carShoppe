@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { useFilterContext } from "../context/FilterContext";
+import { useAuth } from "../context/auth-context";
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
+  const { authState } = useAuth();
   const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
   const { dispatch } = useFilterContext();
@@ -23,7 +25,7 @@ const Navbar = () => {
     a += " hidden";
   }
   let token = localStorage?.getItem("token");
-  console.log("navbar token", token);
+
   return (
     <div className="flex justify-between items-center h-12 max-w-[1980px] px-1 mx-auto text-zinc-600 sticky top-0 bg-white z-10 backdrop-filter backdrop-blur-lg bg-opacity-30">
       <h1
@@ -33,7 +35,7 @@ const Navbar = () => {
         carShoppe
       </h1>
       <input
-        type="text"
+        type="search"
         placeholder="Search Items..."
         onChange={(e) =>
           dispatch({ type: "filterSearch", payload: e.target.value })

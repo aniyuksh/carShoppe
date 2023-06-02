@@ -9,11 +9,9 @@ export const Sidebar = () => {
   const { state, dispatch } = useFilterContext();
   const [isFilterToggle, setFilterToggle] = useState(false);
 
-  let  {categoryData}  = productStateData
-  let categoryMapData = (categoryData.flat(1))
-  
+  let { categoryData } = productStateData;
+  let categoryMapData = categoryData.flat(1);
 
-  
   function filterToggleHandler() {
     setFilterToggle((prev) => !prev);
   }
@@ -59,12 +57,10 @@ export const Sidebar = () => {
       };
     }
   }
+  // console.log(first)
 
-  
   return (
-    
     <aside className="text-zinc-700 h-[40%] sticky justify-between top-0 left-0 y overflow-y-scroll min-w-[16rem] max-w-[24rem] py-2 px-2">
-     
       <section className="flex justify-between">
         <h2 className="text-lg">
           <span className="font-semibold">Apply</span>
@@ -100,6 +96,9 @@ export const Sidebar = () => {
               <input
                 type="checkbox"
                 // checked={state.filterCategory}
+                checked={state.filterCategory.includes(
+                  `${category.categoryName}`
+                )}
                 value={category.categoryName}
                 id={category.categoryName}
                 name="category"
@@ -120,8 +119,10 @@ export const Sidebar = () => {
             name="fuel"
             className="mr-2"
             // checked={state.filterCategory}
+            checked={state.filterFuel.includes(`Petrol`)}
             onChange={(e) => dispatch(fuelHandler(e))}
           />
+          {/* {console.log("category", state.filterCategory)} */}
           <label>Petrol</label>
         </div>
         <div>
@@ -131,6 +132,7 @@ export const Sidebar = () => {
             name="fuel"
             className="mr-2"
             // checked={state.filterCategory}
+            checked={state.filterFuel.includes(`Diesel`)}
             onChange={(e) => dispatch(fuelHandler(e))}
           />
           <label>Diesel</label>
@@ -138,10 +140,11 @@ export const Sidebar = () => {
         <div>
           <input
             type="checkbox"
-            value="cng"
+            value="Cng"
             name="fuel"
             className="mr-2"
             // checked={state.filterCategory}
+            checked={state.filterFuel.includes(`Cng`)}
             onChange={(e) => dispatch(fuelHandler(e))}
           />
           <label>Cng</label>
@@ -162,6 +165,7 @@ export const Sidebar = () => {
                 name="brand"
                 className="mr-2"
                 // checked={state.filterBrand}
+                checked={state.filterBrand.includes(`${brand}`)}
                 onChange={(e) => dispatch(brandHandler(e))}
               />
               {brand}

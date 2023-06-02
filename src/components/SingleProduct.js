@@ -17,7 +17,6 @@ const SingleProduct = ({ product }) => {
   const navigate = useNavigate();
 
   function pageNavigator(id) {
-    console.log("clciked", id);
     navigate(`/single/${id}`);
   }
 
@@ -122,7 +121,10 @@ const SingleProduct = ({ product }) => {
           />
         </div>
         <div className="flex justify-between items-center px-1 border border-b-gray-200 md:border md:border-b-gray-200">
-          <div className="flex flex-col items-start py-2">
+          <div
+            className="flex flex-col items-start py-2"
+            onClick={() => pageNavigator(product._id)}
+          >
             <p className="justify-items-start font-semibold">
               {product.brand}-
               <span className="text-[15px] font-normal">{product.model}</span>
@@ -134,7 +136,7 @@ const SingleProduct = ({ product }) => {
             </p>
           </div>
 
-          <div>
+          <div onClick={() => pageNavigator(product._id)}>
             <p className="font-normal">
               <span className="text-[15px] font-semibold">Price-</span>
               {product.price}
