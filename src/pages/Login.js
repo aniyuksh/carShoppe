@@ -16,44 +16,9 @@ export const Login = () => {
   });
   const { email, password } = users[0];
 
-  // async function testLoginHandler(e){
-  //   const {email , password} = e;
-  //   e.preventDefault();
-  //   console.log("came")
-  //  try{
-  // const res = await axios.post("/api/auth/login", { email, password })
-  // console.log(res);
-  // if(res?.status === 200 || res?.status === 201){
-  // authDispatch({type : "User-pass" , payload : res?.data?.foundUser})
-  // localStorage.setItem("token", res?.data?.encodedToken);
-  // localStorage.setItem("user", JSON.stringify(res?.data.foundUser));
-  // navigate(-1);
-  // console.log("succccccccc");
-  // const res = await loginServices('adarshbalak@gmail.com', 'adarshBalaki123');
-  // console.log("res",res)
-  // }
-  //  }
-  //  catch(e){
-  // alert(e);
-  // authDispatch({ type : "User-fail" });
-  //  }
-  // }
-
-  // async function test(e){
-  //   e.preventDefault();
-  //   const res = await axios.post("/api/auth/login" , {
-  //     email , password
-  //   })
-  //   console.log(res);
-  // }
-
   async function testLoginHandler(e) {
     e.preventDefault();
     try {
-      // const res = await axios.post("/api/auth/login" , {
-      //   email: "adarshbalika@gmail.com",
-      //   password: "adarshbalika",
-      // });
       const res = await fetch("/api/auth/login", {
         method: "POST",
         body: JSON.stringify({
@@ -66,7 +31,7 @@ export const Login = () => {
         authDispatch({ type: "User-pass", payload: nres?.foundUser });
         localStorage.setItem("token", nres.encodedToken);
         localStorage.setItem("user", JSON.stringify(nres?.foundUser));
-        // console.log("succccccccccccccc");
+
         navigate("/productDisplay");
       }
     } catch (e) {
@@ -82,12 +47,9 @@ export const Login = () => {
     e.preventDefault();
     try {
       const n = { email: email, password: password };
-      // const res = await fetch("/api/auth/login" , {
-      //   method : "POST",
-      //   body : JSON.stringify(n)
-      // });
+
       const res = await axios.post("/api/auth/login", { email, password });
-      // console.log("res" , res);
+
       if (res.statusText === "OK") {
         authDispatch({ type: "User-pass", payload: res?.data?.foundUser });
         localStorage.setItem("token", res.data.encodedToken);

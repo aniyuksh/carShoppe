@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  createContext,
-  useCallback,
-} from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import axios from "axios";
 import { useAuth } from "./auth-context";
 
