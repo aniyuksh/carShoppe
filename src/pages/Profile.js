@@ -4,6 +4,8 @@ import { useAuth } from "../context/auth-context";
 import { useWish } from "../context/wishlistContext";
 import { useCart } from "../context/cartContext";
 import { useNavigate } from "react-router-dom";
+import { useAddr } from "../context/addressContext";
+import AddressForm from "../components/AddressForm";
 
 const Profile = () => {
   let details = JSON.parse(localStorage?.getItem("user"));
@@ -12,6 +14,9 @@ const Profile = () => {
   const { setCart } = useCart();
   const { setWish } = useWish();
   const navigate = useNavigate();
+  const { state, dispatch } = useAddr();
+  const [showForm, setShowForm] = useState(false);
+  const [editItem, setEditItem] = useState(null);
 
   function logoutHandler() {
     localStorage?.removeItem("token");
@@ -20,6 +25,15 @@ const Profile = () => {
     setCart([]);
     setWish([]);
     navigate(-1);
+  }
+
+  function deleteAdd(id) {
+    dispatch({ type: "remove-addr", payload: id });
+  }
+
+  function editAdrr(item) {
+    setShowForm((prev) => !prev);
+    setEditItem(item);
   }
 
   return (
@@ -51,18 +65,50 @@ const Profile = () => {
               </button>
             </div>
           ) : (
-            <div className="w-[100%] border border-red-300  flex">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Debitis, aut quam. Accusamus repellendus quae esse doloribus
-                atque aspernatur facere neque delectus, aliquam non aut dicta
-                veniam, hic labore asperiores accusantium. Natus a alias
-                provident aliquam perspiciatis explicabo labore laudantium
-                dolore blanditiis accusantium, officiis pariatur aliquid dicta
-                veniam voluptatem praesentium eum.
-              </p>
+            <div className="w-[100%] border border-red-300  flex flex-col">
+              {state.map((item) => {
+                return (
+                  <div className="flex flex-col  items-center w-[100%]">
+                    <p>Name: {item.name}</p>
+                    <p>Mobile: {item.phone}</p>
+                    <p>
+                      City: {item.city} - {item.pin}
+                    </p>
+                    <p>Address: {item.addressLine} </p>
+                    <div className="flex w-[100%] justify-evenly">
+                      <button
+                        onClick={() => editAdrr(item)}
+                        className="border border-gray-500 p-1 w-[25%] rounded-2xl"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => deleteAdd(item.id)}
+                        className="border border-gray-500 p-1 w-[25%] rounded-2xl"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+              <button
+                onClick={() => setShowForm((prev) => !prev)}
+                className="border border-gray-500 m-2"
+              >
+                Add Address+
+              </button>
             </div>
           )}
+          <section>
+            {showForm && (
+              <AddressForm
+                item={editItem}
+                setShowForm={setShowForm}
+                setEditItem={setEditItem}
+              />
+            )}
+          </section>
         </div>
       </section>
     </div>
@@ -70,38 +116,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-{
-  /* <div className="flex flex-col justify-center items-center justify-items-center align-middle h-full">
-          <div className="border border-gray-500  items-center justify-center justify-items-center flex flex-col align-middle max-w-lg px-2 py-2">
-            <div className="flex justify-evenly w-full">
-              <button
-                className="border border-red-300 px-10 py-1"
-                onClick={() => setToShow("profile")}
-              >
-                Profile
-              </button>
-              <button
-                className="border border-red-300 px-10 py-1"
-                onClick={() => setToShow("address")}
-              >
-                Address
-              </button>
-            </div>
-            <div className="">
-              {toShow === "profile" ? (
-                <div className="flex flex-col justify-start items-start">
-                  <p>Firstname:{details.firstName}</p>
-                  <p>Lastname:{details.lastName}</p>
-                  <p>Email:{details.email}</p>
-                </div>
-              ) : (
-                <p>
-                  2{details.firstName} {details.lastName} {details.email}
-                </p>
-              )}
-            </div>
-          </div>
-          <button>logout</button>
-        </div> */
-}

@@ -67,7 +67,7 @@ export const ProductDisplay = () => {
             <Sidebar />
           </section>
 
-          <main className="grid grid-cols-1 gap-6 max-sm:w-[70%]   max-sm:mx-auto sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mr-5">
+          <main className="grid grid-cols-1 gap-6 max-sm:w-[70%] max-sm:mx-auto sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 mr-5">
             {appliedFilterData.length === 0 && (
               <p
                 className="text-[50px] text-zinc-800 w-[full]

@@ -12,6 +12,7 @@ import {
 } from "../context/utilityFunctions/wishlistUtility";
 import { useNavigate } from "react-router-dom";
 import { useWish } from "../context/wishlistContext";
+import AddressForm from "../components/AddressForm";
 
 const Cart = () => {
   const { cart, setCart } = useCart();
@@ -63,6 +64,7 @@ const Cart = () => {
   return (
     <>
       <Navbar />
+      {/* <AddressForm /> */}
       <section className="justify-evenly flex max-sm:flex-col">
         {cart.length === 0 && (
           <p
@@ -73,6 +75,7 @@ const Cart = () => {
             Cart is empty :/
           </p>
         )}
+
         <div className=" inline-block">
           {cart.map((item) => {
             return (
