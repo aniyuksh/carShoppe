@@ -2,15 +2,33 @@ import React, { useState } from "react";
 import { useAddr } from "../context/addressContext";
 import { useCart } from "../context/cartContext";
 import Navbar from "../components/navbar";
+import axios from "axios";
 
 const Checkout = () => {
   const { state } = useAddr();
-  const { cart } = useCart();
+  const { cart, setCart } = useCart();
   const [selected, setSelected] = useState(null);
   let totalPrice = cart.reduce((acc, curr) => (acc += Number(curr.price)), 0);
+  console.log("pehle ki cart", cart);
+  async function cartRemoveFunc(id) {
+    // e.preventDefault();
+    let token = localStorage?.getItem("token");
+    try {
+      const { data } = await axios.delete(`/api/user/cart/${id}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      setCart(data.cart);
+    } catch (err) {
+      console.log("cart removal error", err);
+    }
+  }
 
   function handleOrder(e) {
     e.preventDefault();
+    cart.map((ele) => cartRemoveFunc(ele._id));
+    console.log("updated cart", cart);
   }
 
   return (
