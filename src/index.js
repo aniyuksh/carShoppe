@@ -6,8 +6,11 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { makeServer } from "./server";
 import ProductContext from "./context/ProductContext";
-import FilterContextProvider from "../src/context/FilterContext"
+import FilterContextProvider from "../src/context/FilterContext";
 import { AuthContextProvider } from "./context/auth-context";
+import { CartContextProvider } from "./context/cartContext";
+import { WishListContextProvider } from "./context/wishlistContext";
+import { AddressProvider } from "./context/addressContext";
 
 // Call make Server
 makeServer();
@@ -15,12 +18,18 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-    <AuthContextProvider>
-      <FilterContextProvider>
-      <ProductContext>
-      <App />
-      </ProductContext>
-      </FilterContextProvider>
+      <AuthContextProvider>
+        <FilterContextProvider>
+          <AddressProvider>
+            <CartContextProvider>
+              <WishListContextProvider>
+                <ProductContext>
+                  <App />
+                </ProductContext>
+              </WishListContextProvider>
+            </CartContextProvider>
+          </AddressProvider>
+        </FilterContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>,
