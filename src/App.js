@@ -15,6 +15,7 @@ import Cart from "./pages/Cart";
 import WIshList from "./pages/WIshList";
 import Profile from "./pages/Profile";
 import Error from "./pages/Error";
+import Checkout from "./pages/Checkout";
 
 makeServer();
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<WIshList />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

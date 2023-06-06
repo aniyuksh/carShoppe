@@ -22,6 +22,11 @@ const AddressForm = ({ item, setEditItem, setShowForm }) => {
   }
   console.log(setEditItem);
   function onFormSubmit() {
+    const { name, phone, city, pin, addressLine } = newAddr;
+    if (name && phone && city && pin && addressLine == "") {
+      alert("Fill proper detailss");
+      return;
+    }
     if (item) {
       dispatch({
         type: "edit-addr",

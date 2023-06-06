@@ -190,7 +190,7 @@ const Cart = () => {
                     )}
                   </p>
                 </div>
-                <div>
+                <div onClick={() => navigate("/checkout")}>
                   <button className="text-lg border border-gray-500 w-[100%] rounded-lg">
                     Checkout
                   </button>

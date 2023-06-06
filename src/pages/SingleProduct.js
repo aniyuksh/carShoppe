@@ -7,6 +7,11 @@ import { GiVibratingShield } from "react-icons/gi";
 import { BsBookmarkPlus } from "react-icons/bs";
 import { useCart } from "../context/cartContext";
 import axios from "axios";
+import { useWish } from "../context/wishlistContext";
+import {
+  addWish,
+  removeWish,
+} from "../context/utilityFunctions/wishlistUtility";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -18,6 +23,7 @@ const SingleProduct = () => {
   const data = productData.flat(1);
   let token = localStorage.getItem("token");
   const { cart, setCart } = useCart();
+  const { wish, setWish } = useWish();
 
   useEffect(() => {
     setClickedData(data?.find(({ _id }) => _id === id));
@@ -112,7 +118,32 @@ const SingleProduct = () => {
                   </button>
                 )}
 
-                <BsBookmarkPlus className="text-2xl relative top-[12px] mx-[2px] cursor-pointer hover:text-rose-500" />
+                {wish.some((ele) => ele._id === clickedData._id) ? (
+                  <span
+                    onClick={() => {
+                      token
+                        ? removeWish(clickedData._id, setWish)
+                        : navigate("/login");
+                      console.log("onlick chal rha hai");
+                    }}
+                  >
+                    <BsBookmarkPlus
+                      size={20}
+                      className="hover:text-rose-600 text-red-700"
+                    />
+                  </span>
+                ) : (
+                  <span
+                    onClick={() => {
+                      token
+                        ? addWish(clickedData, setWish)
+                        : navigate("/login");
+                      console.log("onclick chal rha h");
+                    }}
+                  >
+                    <BsBookmarkPlus size={20} className="hover:text-rose-600" />
+                  </span>
+                )}
               </div>
             </div>
           </div>

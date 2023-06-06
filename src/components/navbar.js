@@ -4,10 +4,14 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { useFilterContext } from "../context/FilterContext";
 import { useAuth } from "../context/auth-context";
+import { useWish } from "../context/wishlistContext";
+import { useCart } from "../context/cartContext";
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
   const { authState } = useAuth();
+  const { cart } = useCart();
+  const { wish } = useWish();
   const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
   const { dispatch } = useFilterContext();
@@ -54,10 +58,20 @@ const Navbar = () => {
           <NavLink to="/productDisplay">Explore</NavLink>
         </li>
         <li>
-          <NavLink to={token ? "/wishlist" : "/login"}>Wishlist</NavLink>
+          <NavLink to={token ? "/wishlist" : "/login"}>
+            Wishlist
+            <span className={wish.length > 0 ? "" : "hidden"}>
+              ({wish.length})
+            </span>
+          </NavLink>
         </li>
         <li>
-          <NavLink to={token ? "/cart" : "/login"}>Cart</NavLink>
+          <NavLink to={token ? "/cart" : "/login"}>
+            Cart{" "}
+            <span className={cart.length > 0 ? "" : "hidden"}>
+              ({cart.length})
+            </span>
+          </NavLink>
         </li>
         <li>
           {token ? (
@@ -90,13 +104,17 @@ const Navbar = () => {
               <NavLink to="/productDisplay">Explore</NavLink>
             </li>
           </Link>
+          <Link to="/cart">
+            <li className="border-b border-gray-150 pb-3">
+              <NavLink to="/cart">Cart</NavLink>
+            </li>
+          </Link>
+          <Link to="/wishlist">
+            <li className="border-b border-gray-150 pb-3">
+              <NavLink to="/wishlist">Wishlist</NavLink>
+            </li>
+          </Link>
 
-          <li className="border-b border-gray-150 pb-3">
-            <NavLink>Cart</NavLink>
-          </li>
-          <li className="border-b border-gray-150 pb-3">
-            <NavLink>Wishlist</NavLink>
-          </li>
           <li className="border-b border-gray-150 pb-3">
             {token ? (
               <NavLink to="/profile">Profile</NavLink>

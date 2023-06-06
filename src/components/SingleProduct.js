@@ -20,47 +20,6 @@ const SingleProduct = ({ product }) => {
     navigate(`/single/${id}`);
   }
 
-  // async function addToCart(prod){
-  //     // console.log("PRODUCTCART" , prod);
-  //     if(cart.find((ele)=>ele._id === prod._id)){
-  //         alert("Already Present")
-  //         return;
-  //     }
-  //     // console.log("DATA" , )
-
-  //     try {
-  //         const { data } = await axios.post(
-  //           "/api/user/cart",
-  //           { prod },
-  //           {
-  //             headers: {
-  //               authorization: token,
-  //             },
-  //           }
-  //         );
-  //         setCart(data.cart);
-  //         navigate("/cart");
-  //         console.log("DATACART" , data.cart);
-  //       }
-
-  //     // try{
-  //     //     const {data} = await axios.post("/api/user/cart",
-  //     //     { prod } , {
-  //     //         headers : {
-  //     //             authorization : token()
-  //     //         }
-  //     //     }
-  //     //     )
-  //     //     setCart(data.cart)
-  //     //     console.log("CART DATA" , data.cart);
-  //     //     // console.log("CARTdata", data)
-  //     //     navigate("/cart");
-  //     // }
-  //     catch(e){
-  //         console.log("addToCart Error" , e)
-  //     }
-  // }
-
   async function addToCart(prod) {
     if (cart.find((item) => item._id === prod._id)) {
       console.warn("Item is Already present in cart");
@@ -174,9 +133,10 @@ const SingleProduct = ({ product }) => {
 
           {wish.some((ele) => ele._id === product._id) ? (
             <span
-              onClick={() =>
-                token ? removeWish(product._id, setWish) : navigate("/login")
-              }
+              onClick={() => {
+                token ? removeWish(product._id, setWish) : navigate("/login");
+                console.log("onlick chal rha hai");
+              }}
             >
               <BsBookmarkPlus
                 size={20}
@@ -185,9 +145,10 @@ const SingleProduct = ({ product }) => {
             </span>
           ) : (
             <span
-              onClick={() =>
-                token ? addWish(product, setWish) : navigate("/login")
-              }
+              onClick={() => {
+                token ? addWish(product, setWish) : navigate("/login");
+                console.log("onclick chal rha h");
+              }}
             >
               <BsBookmarkPlus size={20} className="hover:text-rose-600" />
             </span>

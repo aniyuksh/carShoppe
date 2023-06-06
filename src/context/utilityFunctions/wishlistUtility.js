@@ -6,6 +6,7 @@ let token = localStorage?.getItem("token");
 
 // const {setWish} = useWish();
 async function addWish(product, setWish) {
+  console.log("called from single");
   try {
     let token = localStorage?.getItem("token");
     const { data } = await axios.post(
@@ -25,6 +26,7 @@ async function addWish(product, setWish) {
 }
 
 async function removeWish(id, setWish) {
+  console.log("called from single");
   try {
     let token = localStorage?.getItem("token");
     const { data } = await axios.delete(`/api/user/wishlist/${id}`, {
