@@ -31,7 +31,7 @@ const Navbar = () => {
   let token = localStorage?.getItem("token");
 
   return (
-    <div className="flex justify-between items-center h-12 max-w-[1980px] px-1 mx-auto text-zinc-600 sticky top-0 bg-white z-10 backdrop-filter backdrop-blur-lg bg-opacity-30">
+    <div className="flex justify-between items-center h-[10vh] max-w-[100vw]  w-[100vw] px-7 text-zinc-600 sticky top-0 bg-red-500 z-10 backdrop-filter backdrop-blur-lg ">
       <h1
         className="text-3xl font-semibold cursor-pointer"
         onClick={() => navigate("/")}
@@ -50,7 +50,7 @@ const Navbar = () => {
         }
       />
 
-      <ul className="hidden max-md:flex max-md:gap-3 "></ul>
+      {/* <ul className="hidden max-md:flex max-md:gap-3 "></ul> */}
 
       <ul className=" hidden md:flex gap-8 px-3 ">
         {/* <BsSearch size={20} /> */}
@@ -129,10 +129,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-{
-  /* <h2  style={{ display:"inline-block" }} >Logo</h2>
-        <input placeholder='Search'/>
-        <NavLink>Products</NavLink>
-        <NavLink>Login</NavLink> */
-}

@@ -6,7 +6,7 @@ import smlogin from "../assets/hero-images/smlogin.svg";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { users } from "../backend/db/users";
-
+import { toast } from "react-toastify";
 export const Login = () => {
   const { authDispatch } = useAuth();
   const navigate = useNavigate();
@@ -31,8 +31,8 @@ export const Login = () => {
         authDispatch({ type: "User-pass", payload: nres?.foundUser });
         localStorage.setItem("token", nres.encodedToken);
         localStorage.setItem("user", JSON.stringify(nres?.foundUser));
-
         navigate("/productDisplay");
+        toast.success("Login succesfull");
       }
     } catch (e) {
       alert(e);
@@ -54,8 +54,9 @@ export const Login = () => {
         authDispatch({ type: "User-pass", payload: res?.data?.foundUser });
         localStorage.setItem("token", res.data.encodedToken);
         localStorage.setItem("user", JSON.stringify(res?.data.foundUser));
-        // console.log("succccccccccccccc");
+
         navigate("/productDisplay");
+        toast.success("Login succesfull");
       }
     } catch (e) {
       console.log(e);

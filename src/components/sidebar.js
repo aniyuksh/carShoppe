@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useProductContext } from "../context/ProductContext";
+
 import { useProductContext } from "../context/ProductContext";
 import { useFilterContext } from "../context/FilterContext";
 const Brands = ["Suzuki", "Tata", "Hyundai", "Skoda"];
@@ -60,7 +60,7 @@ export const Sidebar = () => {
   // console.log(first)
 
   return (
-    <aside className="text-zinc-700 h-[40%] sticky justify-between top-0 left-0 y overflow-y-scroll min-w-[16rem] max-w-[24rem] py-2 px-2">
+    <aside className="text-zinc-700 h-[100%] justify-between overflow-scroll w-[100%] py-2 px-2 ">
       <section className="flex justify-between">
         <h2 className="text-lg">
           <span className="font-semibold">Apply</span>
@@ -236,6 +236,7 @@ export const Sidebar = () => {
             value="lowToHigh"
             name="priceSort"
             id="priceSort"
+            checked={state.filterByPrice === "lowToHigh"}
             onChange={(e) =>
               dispatch({ type: "lowToHigh", payload: e.target.value })
             }
@@ -248,6 +249,7 @@ export const Sidebar = () => {
             value="highToLow"
             name="priceSort"
             id="priceSort"
+            checked={state.filterByPrice === "highToLow"}
             onChange={(e) =>
               dispatch({ type: "highToLow", payload: e.target.value })
             }

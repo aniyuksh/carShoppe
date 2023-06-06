@@ -36,39 +36,16 @@ const SingleProduct = ({ product }) => {
         }
       );
       setCart(data.cart);
-      // console.log("DATATOCART", data.cart);
-      // navigate("/cart");
     } catch (e) {
       console.log("ADDTOCARTERROR", e);
     }
-
-    //   try {
-    //     const resp = await fetch(
-    //       "/api/user/cart", {
-    //         method : "POST",
-    //             headers: {
-    //               authorization: token,
-    //             },
-    //         body : JSON.stringify({ product : prod })
-    //       }
-    //     //   { prod }
-
-    //     );
-    //     const {cart} = await resp.json()
-    //     console.log("DATA", cart);
-    //     setCart(cart);
-    //     console.log("ADDTOCARTFUNC",cart)
-    //     navigate("/cart");
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
   }
 
   return (
     <>
       <div
         key={product._id}
-        className="flex flex-col rounded my-5 h-[230px] bg-gray-100 text max-sm:pb-2 text-zinc-800 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]
+        className="flex flex-col rounded my-5 w-[250px] max-w-[auto] h-[250px] max-h-[auto] bg-gray-100 text max-sm:pb-2 text-zinc-800 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]
     "
       >
         <div className="object-contain bg-gray-100 ">

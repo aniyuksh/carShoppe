@@ -3,16 +3,21 @@ import { useAddr } from "../context/addressContext";
 import { useCart } from "../context/cartContext";
 import Navbar from "../components/navbar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import AddressForm from "../components/AddressForm";
 
 const Checkout = () => {
   const { state } = useAddr();
   const { cart, setCart } = useCart();
   const [selected, setSelected] = useState(null);
+  const navigate = useNavigate();
+  const [showForm, setShowForm] = useState(false);
+
   let totalPrice = cart.reduce((acc, curr) => (acc += Number(curr.price)), 0);
-  console.log("pehle ki cart", cart);
+
   async function cartRemoveFunc(id) {
-    // e.preventDefault();
     let token = localStorage?.getItem("token");
+    // e.preventDefault();
     try {
       const { data } = await axios.delete(`/api/user/cart/${id}`, {
         headers: {
@@ -27,15 +32,16 @@ const Checkout = () => {
 
   function handleOrder(e) {
     e.preventDefault();
+
     cart.map((ele) => cartRemoveFunc(ele._id));
-    console.log("updated cart", cart);
+    navigate("/order");
   }
 
   return (
     <div className="w-[100%]">
       <Navbar />
       <p className="text-zinc-800 text-2xl mt-5">Checkout</p>
-      <div className="max-w-[80%] border border-red-500 m-auto flex p-10 mt-5 justify-around">
+      <div className="max-w-[80%] border border-gray-500 m-auto flex p-10 mt-5 justify-around">
         <div className=" w-[30%] ">
           <p className="font-semibold text-xl m-2">Addresses</p>
           <div className="flex flex-col ">
@@ -55,8 +61,20 @@ const Checkout = () => {
               ))}
             </div>
           </div>
+          <div>
+            <button
+              onClick={() => setShowForm((prev) => !prev)}
+              className="border border-gray-500 m-2 p-2 rounded-xl"
+            >
+              Add Address+
+            </button>
+
+            <section>
+              {showForm && <AddressForm setShowForm={setShowForm} />}
+            </section>
+          </div>
         </div>
-        <div className="border border-red-500 w-[30%] p-4">
+        <div className="border border-gray-500 w-[30%] p-4">
           <div>
             <p className=" text-xl font-semibold">Order Details</p>
           </div>

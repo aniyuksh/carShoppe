@@ -51,9 +51,103 @@ const SingleProduct = () => {
   }
 
   return (
-    <div>
+    <div className="flex flex-col w-[100vw]  justify-center items-center ">
       <Navbar />
-      <section className="min-h-[70vh] my-3 flex flex-col justify-center m-auto item max-w-[50%] text-zinc-800 ">
+      <div className="flex sm:flex-row flex-col mx-auto h-[90vh] w-[100%] justify-center items-center sm:gap-10 gap-0 justify-items-center">
+        <div className="sm:min-w-[250px] sm:min-h-[500px] min-h-[250px] sm:w-[45%] w-[90%] justify-center items-center flex">
+          <div>
+            <img src={clickedData?.url} alt="Image sent" />
+          </div>
+        </div>
+        <div className="flex flex-col sm:min-h-[500px] min-h-[250px] sm:w-[45%] sm:min-w-[250px] w-[90%] justify-center">
+          <div className="flex flex-col gap-4">
+            <div className="flex text-4xl font-semibold gap-8 text-center">
+              <p>{clickedData?.model} </p>
+              <p>{clickedData?.brand}</p>
+            </div>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque
+              autem praesentium blanditiis deserunt doloribus dicta, fugiat,
+              debitis cumque aperiam ratione alias ad, voluptatem nam optio
+              expedita maiores nihil nulla nobis.
+            </p>
+            <div className="flex justify-between px-[1rem]">
+              <div className="flex gap-1">
+                <GiVibratingShield size={20} className="top-1 relative" />
+                <p>{clickedData?.ncap}</p>
+              </div>
+              <p>Fuel: {clickedData?.fueltype}</p>
+            </div>
+            <div className="flex justify-between">
+              <p className="text-start px-[1rem] text-2xl">
+                <span className="font-bold">&#8377;</span>
+                {clickedData?.price}
+              </p>
+              <p>Mileage: {clickedData.mileage}</p>
+            </div>
+          </div>
+          <div className="flex mt-[2rem] gap-10 ml-[1rem]">
+            {cart.some((car) => car._id === clickedData._id) ? (
+              <button
+                className="border border-gray-700 rounded-md px-2 hover:text-slate-50 hover:bg-gray-800"
+                onClick={() => {
+                  token ? navigate("/cart") : navigate("/login");
+                }}
+              >
+                Go to Cart
+              </button>
+            ) : (
+              <button
+                className="border border-gray-700 rounded-md px-2 hover:text-slate-50 hover:bg-gray-800"
+                onClick={() => {
+                  token ? addToCart(clickedData) : navigate("/login");
+                }}
+              >
+                Add to Cart
+              </button>
+            )}
+
+            {wish.some((ele) => ele._id === clickedData._id) ? (
+              <span
+                onClick={() => {
+                  token
+                    ? removeWish(clickedData._id, setWish)
+                    : navigate("/login");
+                }}
+                className="flex gap-[1rem] border border-gray-700 rounded-md px-2 hover:text-slate-50 hover:bg-gray-800 hover:cursor-pointer"
+              >
+                Remove from Wishlist{" "}
+                <BsBookmarkPlus
+                  size={20}
+                  className="hover:text-rose-600 text-red-700"
+                />
+              </span>
+            ) : (
+              <span
+                onClick={() => {
+                  token ? addWish(clickedData, setWish) : navigate("/login");
+                }}
+                className="flex gap-[1rem] border border-gray-700 rounded-md px-2 hover:text-slate-50 hover:bg-gray-800 hover:cursor-pointer"
+              >
+                Add to Wishlist
+                <BsBookmarkPlus
+                  size={20}
+                  className="hover:text-rose-600 relative top-[2px]"
+                />
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+      {/* <Footer /> */}
+    </div>
+  );
+};
+
+export default SingleProduct;
+
+{
+  /* <section className="min-h-[70vh] my-3 flex flex-col justify-center m-auto item max-w-[50%] text-zinc-800 ">
         <div className="flex flex-col border border-gray-400 my-3  items-center">
           <div className="flex justify-center ">
             <img src={clickedData?.url} />
@@ -97,7 +191,7 @@ const SingleProduct = () => {
               </div>
 
               <div className="flex justify-evenly">
-                {/* <button className='border border-gray-600 rounded-lg py-1 px-2 my-2'>Add to Cart</button> */}
+               
                 {cart.some((car) => car._id === clickedData._id) ? (
                   <button
                     className="border border-gray-700 rounded-md px-2 hover:text-slate-50 hover:bg-gray-800"
@@ -149,23 +243,6 @@ const SingleProduct = () => {
           </div>
         </div>
 
-        {/*             
-            <div className='border border-red-800 h-auto my-3'>
-                <img src={clickedData.url}/>
-               
-            </div>
-            <div className='border border-red-800 h-auto my-3'>
-                <img src={clickedData.url}/>
-               
-            </div>
-            <div className='border border-red-800 h-auto my-3'>
-                <img src={clickedData.url}/>
-               
-            </div> */}
-      </section>
-      <Footer />
-    </div>
-  );
-};
-
-export default SingleProduct;
+        
+      </section> */
+}

@@ -17,6 +17,8 @@ import Profile from "./pages/Profile";
 import Error from "./pages/Error";
 import Checkout from "./pages/Checkout";
 import Order from "./pages/Order";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 makeServer();
 function App() {
@@ -36,6 +38,20 @@ function App() {
         <Route path="/order" element={<Order />} />
         <Route path="*" element={<Error />} />
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
     </div>
   );
 }
