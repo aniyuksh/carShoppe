@@ -9,6 +9,10 @@ const Checkout = () => {
   const [selected, setSelected] = useState(null);
   let totalPrice = cart.reduce((acc, curr) => (acc += Number(curr.price)), 0);
 
+  function handleOrder(e) {
+    e.preventDefault();
+  }
+
   return (
     <div className="w-[100%]">
       <Navbar />
@@ -95,10 +99,7 @@ const Checkout = () => {
             </div>
           )}
           <div className="border border-gray-400 rounded-xl font-semibold text-lg m-2">
-            <button
-              disabled={!selected}
-              onClick={() => console.log("clickeds")}
-            >
+            <button disabled={!selected} onClick={(e) => handleOrder(e)}>
               Place Order
             </button>
           </div>
