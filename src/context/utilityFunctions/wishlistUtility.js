@@ -1,6 +1,7 @@
 // removeWish addWish
 
 import axios from "axios";
+import { toast } from "react-toastify";
 // import { useWish } from "../wishlistContext";
 let token = localStorage?.getItem("token");
 
@@ -19,7 +20,7 @@ async function addWish(product, setWish) {
       }
     );
     setWish(data.wishlist);
-    console.log("added wish", data.wishlist);
+    toast.success("Added To Wishlist");
   } catch (err) {
     console.log("add to wish error", err);
   }
@@ -35,7 +36,7 @@ async function removeWish(id, setWish) {
       },
     });
     setWish(data.wishlist);
-    console.log("removed wish", data.wishlist);
+    toast.warn("Removed From Wishlist");
   } catch (err) {
     console.log("wishlist remove error", err);
   }

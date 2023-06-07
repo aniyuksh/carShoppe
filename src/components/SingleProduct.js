@@ -9,6 +9,8 @@ import {
   addWish,
   removeWish,
 } from "../context/utilityFunctions/wishlistUtility";
+import { toast } from "react-toastify";
+
 const SingleProduct = ({ product }) => {
   const token = localStorage.getItem("token");
   const { cart, setCart } = useCart();
@@ -36,6 +38,7 @@ const SingleProduct = ({ product }) => {
         }
       );
       setCart(data.cart);
+      toast.success("Item added to cart");
     } catch (e) {
       console.log("ADDTOCARTERROR", e);
     }

@@ -2,47 +2,62 @@ import React, { useState } from "react";
 import back from "../assets/hero-images/back.svg";
 import Navbar from "../components/navbar";
 import smlogin from "../assets/hero-images/smlogin.svg";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
+import { AiOutlineEye } from "react-icons/ai";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { Footer } from "../components/footer";
 const Signup = () => {
   // const navigate = useNavigate();
   const { authDispatch } = useAuth();
   const navigate = useNavigate();
+  const [showPass, setShowPass] = useState(false);
+  const [showConfirmPass, setShowConfirmPass] = useState(false);
   const [signUpData, setSignUpData] = useState({
-    name: "",
-    mobile: "",
+    firstName: "",
     email: "",
-    date: "",
+    lastName: "",
     password: "",
+    confirmPassword: "",
   });
 
   async function postSignUpData(e) {
-    const { name, mobile, email, date, password } = signUpData;
+    const { firstName, email, lastName, password, confirmPassword } =
+      signUpData;
     try {
       e.preventDefault();
-      if (name && mobile && email && date && password !== "") {
-        const resp = await axios.post("/api/auth/signup", signUpData);
-        if (resp.status === 200 || resp.status === 201) {
-          localStorage.setItem(
-            "login",
-            JSON.stringify({
-              user: resp?.data?.createdUser,
-              token: resp?.data?.encodedToken,
-            })
-          );
-          authDispatch({ type: "User-pass", payload: resp?.data?.createdUser });
-          localStorage.setItem("token", resp?.data?.encodedToken);
-          navigate("/login");
-          // localStorage.setItem("user", resp?.data?.createdUser);
-          // navigate("/");
+      if (
+        firstName &&
+        email &&
+        lastName &&
+        password &&
+        confirmPassword !== ""
+      ) {
+        if (password === confirmPassword) {
+          {
+            const resp = await axios.post("/api/auth/signup", signUpData);
+            if (resp.status === 200 || resp.status === 201) {
+              localStorage.setItem(
+                "login",
+                JSON.stringify({
+                  user: resp?.data?.createdUser,
+                  token: resp?.data?.encodedToken,
+                })
+              );
+              authDispatch({
+                type: "User-pass",
+                payload: resp?.data?.createdUser,
+              });
+              localStorage.setItem("token", resp?.data?.encodedToken);
+              navigate("/login");
+            }
+          }
+        } else {
+          toast.warn("Password Mismatch");
         }
-
-        // localStorage.setItem("login" , data.createdUser);
-        // console.log(localStorage.getItem("login" , data.encodedToken));
-        // console.log();
       } else {
-        alert("Enter valid Data");
+        toast.warn("Enter proper data");
       }
     } catch (e) {
       alert(e);
@@ -51,45 +66,52 @@ const Signup = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="absolute">
-        <div className="">
-          <img src={back} className=" w-[100vw] h-[auto] max-sm:hidden" />
-        </div>
-        <div className="max-sm:h-[90vh] max-sm:top-0 max-sm:left-0 max-sm:relative">
-          <img src={smlogin} className="  md:hidden" />
-        </div>
-        <h2
-          className=" absolute top-[130px] left-[135px] py-2 text-zinc-100 text-3xl 
-            
-            max-sm:left-[155px] max-sm:top-[120px] max-sm:text-3xl"
-        >
-          Sign Up
-        </h2>
-        <form
-          onSubmit={postSignUpData}
-          className=" border border-yellow-100 w-[300px] h-[380px] justify-center items-center flex flex-col absolute top-[180px] left-10
-            max-sm:top-[20vh]  max-sm:left-[55px] max-sm:bg-blend-overlay text-black"
-        >
-          <div>
-            <div className=" flex py-3">
+      <div className="flex flex-col justify-center  items-center  mx-auto border bg-slate-200">
+        <Link to="/">
+          <p className="text-6xl font-bold text-blue-600 cursor-pointer mb-[2rem]">
+            carShoppe
+          </p>
+        </Link>
+        <div>
+          <p className="text-3xl font-semibold text-black text-center mb-[1rem]">
+            Signup
+          </p>
+          <form
+            className="flex flex-col gap-5 bg-slate-700 mx-auto bg-inherit border-[1px] border-black text-black rounded-md pr-10 pl-14 py-10 "
+            onSubmit={postSignUpData}
+          >
+            <div>
               <input
                 type="text"
-                className="rounded-md py-1 px-1"
-                placeholder="Name"
+                className="h-10 w-72 rounded-md p-2"
+                placeholder="FirstName"
                 name="name"
-                value={signUpData.name}
+                value={signUpData.firstName}
                 onChange={(e) =>
                   setSignUpData((prev) => {
-                    return { ...prev, name: e.target.value };
+                    return { ...prev, firstName: e.target.value };
                   })
                 }
               />
             </div>
-            <div className="flex py-3 ">
+            <div>
               <input
                 type="text"
-                className="rounded-md py-1 px-1"
+                className="h-10 w-72 rounded-md p-2"
+                name="lastName"
+                placeholder="LastName"
+                value={signUpData.lastName}
+                onChange={(e) =>
+                  setSignUpData((prev) => {
+                    return { ...prev, lastName: e.target.value };
+                  })
+                }
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                className="h-10 w-72 rounded-md p-2"
                 placeholder="Email"
                 name="email"
                 value={signUpData.email}
@@ -100,10 +122,10 @@ const Signup = () => {
                 }
               />
             </div>
-            <div className="flex py-3 ">
+            {/* <div>
               <input
                 type="text"
-                className="rounded-md py-1 px-1"
+                className="h-10 w-72 rounded-md p-2"
                 placeholder="Mobile Number"
                 name="mobile"
                 value={signUpData.mobile}
@@ -113,47 +135,70 @@ const Signup = () => {
                   })
                 }
               />
+            </div> */}
+            <div>
+              <div className="flex">
+                <input
+                  type={showPass ? "text" : "password"}
+                  className="h-10 w-72 rounded-md p-2 "
+                  placeholder="Password"
+                  name="password"
+                  value={signUpData.password}
+                  onChange={(e) =>
+                    setSignUpData((prev) => {
+                      return { ...prev, password: e.target.value };
+                    })
+                  }
+                />
+                <div
+                  className=" relative right-5 top-2 text-black"
+                  onClick={() => setShowPass((prev) => !prev)}
+                >
+                  <AiOutlineEye size={20} />
+                </div>
+              </div>
             </div>
-            <div className="flex py-3 ">
-              <input
-                type="date"
-                className="rounded-md py-1 px-1 text-black"
-                name="date"
-                value={signUpData.date}
-                onChange={(e) =>
-                  setSignUpData((prev) => {
-                    return { ...prev, date: e.target.value };
-                  })
-                }
-              />
+
+            <div>
+              <div className="flex">
+                <input
+                  type={showConfirmPass ? "text" : "password"}
+                  className="h-10 w-72 rounded-md p-2"
+                  placeholder="Confirm Password"
+                  name="confirm password"
+                  value={signUpData.confirmPassword}
+                  onChange={(e) =>
+                    setSignUpData((prev) => {
+                      return { ...prev, confirmPassword: e.target.value };
+                    })
+                  }
+                />
+                <div
+                  className=" relative right-5 top-2 text-black"
+                  onClick={() => setShowConfirmPass((prev) => !prev)}
+                >
+                  <AiOutlineEye size={20} />
+                </div>
+              </div>
             </div>
-            <div className="flex py-3 ">
-              <input
-                type="password"
-                className="rounded-md py-1 px-1"
-                placeholder="Password"
-                name="password"
-                value={signUpData.password}
-                onChange={(e) =>
-                  setSignUpData((prev) => {
-                    return { ...prev, password: e.target.value };
-                  })
-                }
-              />
-            </div>
-            <div className="flex justify-start py-3">
-              <button className="px-3 py-1 rounded-lg border border-gray-100 text-white">
-                SignUp
+
+            <div className="flex">
+              <button className="bg-green-600 border-[2px] border-green-600   hover:bg-green-500 px-3 py-2 w-72 rounded-md font-semibold">
+                Signup
               </button>
             </div>
-            <p className="text-zinc-50">
-              Have an Account?{" "}
-              <Link to="/login">
-                <span>Login</span>
-              </Link>
-            </p>
-          </div>
-        </form>
+
+            <div>
+              <p className="text-center text-lg">
+                {" "}
+                Already a user?{" "}
+                <span className="text-blue-400 font-semibold">
+                  <NavLink to={"/login"}>Login </NavLink>
+                </span>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );

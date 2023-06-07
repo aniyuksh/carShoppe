@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useAddr } from "../context/addressContext";
+import { toast } from "react-toastify";
+
 const initialState = {
   name: "",
   phone: "",
@@ -23,8 +25,14 @@ const AddressForm = ({ item, setEditItem, setShowForm }) => {
   console.log(setEditItem);
   function onFormSubmit() {
     const { name, phone, city, pin, addressLine } = newAddr;
-    if (name && phone && city && pin && addressLine == "") {
-      alert("Fill proper detailss");
+    if (
+      name == "" &&
+      phone == "" &&
+      city == "" &&
+      pin == "" &&
+      addressLine == ""
+    ) {
+      toast.warn("Fields must not be empty!!");
       return;
     }
     if (item) {
@@ -45,8 +53,9 @@ const AddressForm = ({ item, setEditItem, setShowForm }) => {
   }
 
   return (
-    <div>
-      <form className="flex flex-col gap-2 border border-gray-400-100 p-5 m-5">
+    <div className=" border-red-300 border-[2px] w-[100%] ">
+      <p className="text-lg text-center">Add A New Address...</p>
+      <form className="flex flex-col gap-2 p-5">
         <div className="border border-gray-500 p-1 rounded-md">
           <input
             type="text"
@@ -58,42 +67,48 @@ const AddressForm = ({ item, setEditItem, setShowForm }) => {
             onChange={(e) => userInputHandler(e, "name")}
           />
         </div>
-        <div className="border border-gray-500 p-1 rounded-md">
-          <input
-            type="text"
-            placeholder="Phone"
-            value={newAddr.phone}
-            onChange={(e) => userInputHandler(e, "phone")}
-            required
-          />
+        <div className="flex justify-between">
+          <div className="border border-gray-500 p-1 rounded-md">
+            <input
+              type="text"
+              placeholder="PinCode"
+              value={newAddr.pin}
+              onChange={(e) => userInputHandler(e, "pin")}
+              required
+            />
+          </div>
+          <div className="border border-gray-500 p-1 rounded-md">
+            <input
+              type="text"
+              placeholder="Phone"
+              value={newAddr.phone}
+              onChange={(e) => userInputHandler(e, "phone")}
+              required
+            />
+          </div>
         </div>
-        <div className="border border-gray-500 p-1 rounded-md">
-          <input
-            type="text"
-            placeholder="City"
-            value={newAddr.city}
-            onChange={(e) => userInputHandler(e, "city")}
-            required
-          />
+
+        <div className="flex justify-between">
+          <div className="border border-gray-500 p-1 rounded-md">
+            <input
+              type="text"
+              placeholder="City"
+              value={newAddr.city}
+              onChange={(e) => userInputHandler(e, "city")}
+              required
+            />
+          </div>
+          <div className="border border-gray-500 p-1 rounded-md">
+            <input
+              type="text"
+              placeholder="State"
+              value={newAddr.state}
+              onChange={(e) => userInputHandler(e, "state")}
+              required
+            />
+          </div>
         </div>
-        <div className="border border-gray-500 p-1 rounded-md">
-          <input
-            type="text"
-            placeholder="State"
-            value={newAddr.state}
-            onChange={(e) => userInputHandler(e, "state")}
-            required
-          />
-        </div>
-        <div className="border border-gray-500 p-1 rounded-md">
-          <input
-            type="text"
-            placeholder="PinCode"
-            value={newAddr.pin}
-            onChange={(e) => userInputHandler(e, "pin")}
-            required
-          />
-        </div>
+
         <div className="border border-gray-500 p-1 rounded-md">
           <input
             type="text"

@@ -3,6 +3,7 @@ import { FaTwitter, FaLinkedin, FaGithub, FaReact } from "react-icons/fa";
 import { SiTailwindcss } from "react-icons/si";
 import { NavLink } from "react-router-dom";
 export const Footer = () => {
+  let token = localStorage?.getItem("token");
   return (
     <footer className=" bg-gray-800 text-zinc-200 flex flex-col pt-3 pb-2">
       <section className="flex flex-col  items-center md:flex-row w-[100vw] max-sm:flex-wrap ">
@@ -17,18 +18,18 @@ export const Footer = () => {
         </section>
         <section className="flex  w-[80%] items-center justify-evenly max-sm:flex-wrap">
           <section className="flex flex-col text-justify">
-            <h1>Services:</h1>
-            <NavLink>Home</NavLink>
-            <NavLink>Explore</NavLink>
-            <NavLink>Cart</NavLink>
-            <NavLink>Wishlist</NavLink>
+            <h1 className="mb-2">About Us</h1>
+            <NavLink>Privacy</NavLink>
+            <NavLink>Careers</NavLink>
+            <NavLink>Contact Us</NavLink>
+            <NavLink>For Business</NavLink>
           </section>
           <section className="flex flex-col text-justify ">
-            <h1>Navigation:</h1>
-            <NavLink>Home11</NavLink>
-            <NavLink>Explore</NavLink>
-            <NavLink>Cart</NavLink>
-            <NavLink>Wishlist</NavLink>
+            <h1 className="mb-2">Navigation:</h1>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/productDisplay">Explore</NavLink>
+            <NavLink to={token ? "/cart" : "/login"}>Cart</NavLink>
+            <NavLink to={token ? "/wishlist" : "/login"}>Wishlist</NavLink>
           </section>
           <div className="flex max-sm:pb-1 pb-3 gap-3 flex-col justify-center max-sm:flex-row ">
             <FaTwitter size={30} />

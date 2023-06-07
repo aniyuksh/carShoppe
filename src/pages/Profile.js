@@ -17,7 +17,7 @@ const Profile = () => {
   const { state, dispatch } = useAddr();
   const [showForm, setShowForm] = useState(false);
   const [editItem, setEditItem] = useState(null);
-
+  console.log("profile", details);
   function logoutHandler() {
     localStorage?.removeItem("token");
     localStorage?.removeItem("user");
@@ -41,19 +41,26 @@ const Profile = () => {
       <Navbar />
       <section className="w-full flex justify-center">
         <div className="flex flex-col items-center min-w-[250px] w-[90%] max-w-[600px] mt-[2rem]">
-          <div className="flex w-[100%]">
+          <div className="flex w-[100%] text-center">
             <div
-              className="w-[50%] bg-red-300"
+              className={
+                toShow === "profile" ? "w-[50%] bg-blue-300 " : "w-[50%] "
+              }
               onClick={() => setToShow("profile")}
             >
-              <button>Profile</button>
+              <button className="">Profile</button>
             </div>
-            <div className="w-[50%]" onClick={() => setToShow("address")}>
+            <div
+              className={
+                toShow === "address" ? "w-[50%] bg-blue-300 " : "w-[50%] "
+              }
+              onClick={() => setToShow("address")}
+            >
               <button>Address</button>
             </div>
           </div>
           {toShow === "profile" ? (
-            <div className=" w-[100%] border border-red-300 flex flex-col  p-10">
+            <div className=" w-[100%] border-[2px] border-red-300 flex flex-col text-center  p-10">
               <p>Firstname: {details?.firstName}</p>
               <p>Lastname: {details?.lastName}</p>
               <p>Email: {details?.email}</p>
@@ -65,7 +72,7 @@ const Profile = () => {
               </button>
             </div>
           ) : (
-            <div className="w-[100%] border border-red-300  flex flex-col">
+            <div className="w-[100%] border-[2px] border-red-300  flex flex-col p-10">
               {state.map((item) => {
                 return (
                   <div className="flex flex-col  items-center w-[100%]">
@@ -100,7 +107,7 @@ const Profile = () => {
               </button>
             </div>
           )}
-          <section>
+          <section className="w-[100%] mt-2 ">
             {showForm && (
               <AddressForm
                 item={editItem}
