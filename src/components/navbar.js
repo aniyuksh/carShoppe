@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   let a =
-    "border border-gray-500 rounded-md text-center w-[30%] h-8 md:flex justify-end";
+    "border border-gray-500 rounded-md text-black text-center w-[30%] h-8 md:flex justify-end";
   if (searchOpen) {
     a += " hidden";
   }
