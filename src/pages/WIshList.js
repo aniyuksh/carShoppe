@@ -11,6 +11,7 @@ import axios from "axios";
 import { useCart } from "../context/cartContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { RotatingLines } from "react-loader-spinner";
 
 const WIshList = () => {
   const { wish, setWish } = useWish();
@@ -68,6 +69,14 @@ const WIshList = () => {
       console.log("ADDTOCARTERROR", e);
     }
   }
+
+  // if (wish.length === 0) {
+  //   return (
+  //     <div className="flex justify-center items-center h-[100vh] w-[100vw]">
+  //       <RotatingLines />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>

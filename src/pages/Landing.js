@@ -7,10 +7,17 @@ import { useNavigate } from "react-router-dom";
 import { Footer } from "../components/footer";
 import { RotatingLines } from "react-loader-spinner";
 
-import i1 from "../../src/assets/hero-images/i1.svg";
-console.log(categories);
 const Landing = () => {
   const navigate = useNavigate();
+
+  if (categories.length === 0) {
+    return (
+      <div className="flex justify-center items-center h-[100vh] w-[100vw]">
+        <RotatingLines />
+      </div>
+    );
+  }
+
   return (
     <>
       {/* {categories.length < 0 && <RotatingLines />} */}
@@ -39,7 +46,7 @@ const Landing = () => {
         <div className="py-4 text-center">
           <p className="text-4xl text-zinc-700 font-bold"> Categories </p>
         </div>
-        <div className="flex justify-evenly my-5 max-sm:flex-col max-sm:justify-center items-center">
+        <div className="flex justify-evenly my-5 max-sm:flex-col max-sm:justify-center items-center cursor-pointer">
           {categories.map((category) => {
             return (
               <>

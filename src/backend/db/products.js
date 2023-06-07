@@ -1,13 +1,19 @@
 import { v4 as uuid } from "uuid";
-
-// import dzire from "../../assets/card-images/dzire.jpg"
-import dzire from "../../assets/card-images/dzire.jpg";
-import dzire1 from "../../assets/card-images/dzire1.jpg";
-import wagon from "../../assets/card-images/wagon.jpeg";
-import nexon from "../../assets/card-images/nexon.jpg";
-
-// const c1 =
-
+import prod1 from "../../assets/card-images/prod1.jpeg";
+import prod2 from "../../assets/card-images/prod2.jpeg";
+import prod3 from "../../assets/card-images/prod3.jpeg";
+import prod4 from "../../assets/card-images/prod4.jpeg";
+import prod5 from "../../assets/card-images/prod5.jpeg";
+import prod16 from "../../assets/card-images/prod16.jpeg";
+import prod7 from "../../assets/card-images/prod7.jpeg";
+import prod8 from "../../assets/card-images/prod8.jpeg";
+import prod9 from "../../assets/card-images/prod9.jpeg";
+import prod10 from "../../assets/card-images/prod10.jpeg";
+import prod11 from "../../assets/card-images/prod11.jpeg";
+import prod12 from "../../assets/card-images/prod12.jpeg";
+import prod13 from "../../assets/card-images/prod13.jpeg";
+import prod14 from "../../assets/card-images/prod14.jpeg";
+import prod15 from "../../assets/card-images/prod15.jpeg";
 /**
  * Product Database can be added here.
  * You can add products of your wish with different attributes
@@ -25,7 +31,7 @@ export const products = [
     mileage: 20,
     preowned: false,
     ncap: 1.7,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod1,
   },
   {
     _id: "p2",
@@ -38,7 +44,7 @@ export const products = [
     mileage: 22,
     preowned: false,
     ncap: 3.0,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod2,
   },
   {
     _id: "p3",
@@ -51,7 +57,7 @@ export const products = [
     mileage: 20,
     preowned: false,
     ncap: 4.0,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod3,
   },
   {
     _id: "p4",
@@ -64,7 +70,7 @@ export const products = [
     mileage: 25,
     preowned: true,
     ncap: 3.5,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod4,
   },
   {
     _id: "p5",
@@ -77,7 +83,7 @@ export const products = [
     mileage: 25,
     preowned: false,
     ncap: 2.5,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod5,
   },
   {
     _id: "p6",
@@ -90,7 +96,7 @@ export const products = [
     mileage: 12,
     preowned: false,
     ncap: 3.2,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod16,
   },
   {
     _id: "p7",
@@ -103,7 +109,7 @@ export const products = [
     mileage: 17,
     preowned: false,
     ncap: 2.8,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod7,
   },
   {
     _id: "p8",
@@ -116,7 +122,7 @@ export const products = [
     mileage: 22,
     preowned: false,
     ncap: 1.9,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod8,
   },
   {
     _id: "p9",
@@ -129,7 +135,7 @@ export const products = [
     mileage: 25,
     preowned: false,
     ncap: 3.8,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod9,
   },
   {
     _id: "p10",
@@ -142,7 +148,7 @@ export const products = [
     mileage: 12,
     preowned: true,
     ncap: 4.8,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod10,
   },
   {
     _id: "p11",
@@ -155,7 +161,7 @@ export const products = [
     mileage: 16,
     preowned: false,
     ncap: 2.6,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod11,
   },
   {
     _id: "p12",
@@ -168,7 +174,7 @@ export const products = [
     mileage: 7,
     preowned: true,
     ncap: 3.6,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod12,
   },
   {
     _id: "p13",
@@ -181,7 +187,7 @@ export const products = [
     mileage: 27,
     preowned: true,
     ncap: 3.0,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod13,
   },
   {
     _id: "p14",
@@ -194,7 +200,7 @@ export const products = [
     mileage: 16,
     preowned: false,
     ncap: 4.5,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod14,
   },
   {
     _id: "p15",
@@ -207,6 +213,6 @@ export const products = [
     mileage: 20,
     preowned: false,
     ncap: 4.9,
-    url: "https://source.unsplash.com/random/720x390/?car",
+    url: prod15,
   },
 ];
