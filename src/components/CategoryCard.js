@@ -12,13 +12,19 @@ const CategoryCard = ({ category }) => {
     dispatch({ type: "filterCategory", payload: cat.categoryName });
     navigate("/productDisplay");
   }
-
+  // console.log("url", category.url);
   return (
     <div
       className="h-[220px] w-[350px] max-sm:my-5 hover:opacity-90 relative "
       onClick={() => filter(category)}
     >
-      <img src={i5} className="object-fill group-hover:opacity-50" />
+      <img
+        src={i5}
+        loading="lazy"
+        className="object-fill group-hover:opacity-50"
+        height="220px"
+        width="350px"
+      />
       <p className="absolute top-[20%] left-[37%] text-white text-2xl">
         {category.categoryName}
       </p>

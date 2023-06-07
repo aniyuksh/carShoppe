@@ -51,15 +51,6 @@ function App() {
         pauseOnHover
         theme="light"
       />
-      {/* <RotatingLines
-        strokeColor="grey"
-        strokeWidth="5"
-        animationDuration="0.75"
-        width="96"
-        visible={true}
-      /> */}
-      {/* Same as */}
-      {/* <ToastContainer /> */}
     </div>
   );
 }

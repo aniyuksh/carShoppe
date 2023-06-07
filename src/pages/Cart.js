@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useWish } from "../context/wishlistContext";
 import AddressForm from "../components/AddressForm";
 import { toast } from "react-toastify";
+import { RotatingLines } from "react-loader-spinner";
 
 const Cart = () => {
   const { cart, setCart } = useCart();
@@ -67,6 +68,14 @@ const Cart = () => {
       console.log(e);
     }
   }
+
+  // if (cart.length === 0) {
+  //   return (
+  //     <div className="flex justify-center items-center h-[100vh] w-[100vw]">
+  //       <RotatingLines />
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
