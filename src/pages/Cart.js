@@ -13,6 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useWish } from "../context/wishlistContext";
 import AddressForm from "../components/AddressForm";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const { cart, setCart } = useCart();
@@ -29,6 +30,7 @@ const Cart = () => {
         },
       });
       setCart(data.cart);
+      toast.info("Item Removed from Cart");
     } catch (err) {
       console.log("cart removal error", err);
     }
@@ -56,6 +58,11 @@ const Cart = () => {
       );
       // console.log("DATA.CART", data.cart);
       setCart(data.cart);
+      if (actionType == "increment") {
+        toast.success("Quantity Increased");
+      } else {
+        toast.success("Quantity Decreased");
+      }
     } catch (e) {
       console.log(e);
     }

@@ -9,12 +9,12 @@ import { useCart } from "../context/cartContext";
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
-  const { authState } = useAuth();
+
   const { cart } = useCart();
   const { wish } = useWish();
   const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
-  const { dispatch } = useFilterContext();
+  const { state, dispatch } = useFilterContext();
   const navOpenHandler = () => {
     setNavOpen((prev) => !prev);
   };
@@ -31,7 +31,7 @@ const Navbar = () => {
   let token = localStorage?.getItem("token");
 
   return (
-    <div className="flex justify-between items-center h-[10vh] max-w-[100vw]  w-[100vw] px-7 text-zinc-600 sticky top-0 bg-red-500 z-10 backdrop-filter backdrop-blur-lg ">
+    <div className="flex justify-between items-center h-[10vh]  w-[100vw] px-7   bg-blue-900 text-white z-10 backdrop-filter backdrop-blur-lg ">
       <h1
         className="text-3xl font-semibold cursor-pointer"
         onClick={() => navigate("/")}

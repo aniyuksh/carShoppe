@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import Navbar from "../components/navbar";
 import back from "../assets/hero-images/back.svg";
 import smlogin from "../assets/hero-images/smlogin.svg";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { users } from "../backend/db/users";
 import { toast } from "react-toastify";
+import { Footer } from "../components/footer";
+
 export const Login = () => {
   const { authDispatch } = useAuth();
   const navigate = useNavigate();
@@ -41,13 +43,11 @@ export const Login = () => {
   }
 
   async function loginHandler(e) {
-    // console.log("Came");
     const { email, password } = loginData;
-    // console.log("logindata" , loginData);
+
     e.preventDefault();
     try {
       const n = { email: email, password: password };
-
       const res = await axios.post("/api/auth/login", { email, password });
 
       if (res.statusText === "OK") {
@@ -63,81 +63,79 @@ export const Login = () => {
       authDispatch({ type: "User-fail" });
     }
   }
-
   return (
     <>
-      <Navbar />
-      <div className="absolute">
-        <div className="overflow-y-hidden overflow-hidden">
-          <img src={back} className=" w-[100vw] h-[auto] max-sm:hidden" />
-        </div>
-        <div className="max-sm:h-[90vh] max-sm:top-0 max-sm:left-0 max-sm:relative">
-          <img src={smlogin} className="  md:hidden" />
-        </div>
-        <div>
-          <h2
-            className=" absolute top-[180px] left-[135px] py-2 text-zinc-100 text-3xl
-            max-sm:left-[185px] max-sm:top-[200px] max-sm:text-3xl"
-          >
+      <div className="flex flex-col justify-start min-h-[100vh] items-center mx-auto border bg-slate-200">
+        <Link to="/">
+          <p className="text-6xl font-bold text-blue-600 mb-[2rem] cursor-pointer">
+            carShoppe
+          </p>
+        </Link>
+        <div className="self-center">
+          <p className="text-3xl font-semibold text-black mb-[1rem] text-center">
             Login
-          </h2>
+          </p>
           <form
+            className="flex flex-col gap-5 bg-slate-700 mx-auto bg-inherit border-[1px] border-black text-white rounded-md px-10 py-10"
             onSubmit={loginHandler}
-            className=" border border-yellow-100 w-[300px] h-[300px] justify-center items-center flex flex-col absolute top-[180px] left-10 text-black
-            max-sm:top-[25vh]  max-sm:left-[55px] max-sm:bg-blend-overlay"
           >
-            <div className>
-              <div className=" flex py-3">
-                <input
-                  type="text"
-                  className="rounded-md py-1 px-1"
-                  placeholder="Email"
-                  name="email"
-                  value={loginData.email}
-                  // onChange={(e)=>setLoginData((prev)=>{ ...prev, email : e.target.value})}
-                  onChange={(e) =>
-                    setLoginData((prev) => {
-                      return { ...prev, email: e.target.value };
-                    })
-                  }
-                />
-              </div>
-              <div className="flex py-3 ">
-                <input
-                  type="text"
-                  className="rounded-md py-1 px-1"
-                  placeholder="Password"
-                  name="password"
-                  value={loginData.password}
-                  // onChange={(e)=>setLoginData((prev)=>{...prev, password : e.target.value})}
-                  // onChange={(e)=>setLoginData((prev)=>{
-                  //   return ({...prev , password : e.target.value})
-                  // })
-                  onChange={(e) =>
-                    setLoginData((prev) => {
-                      return { ...prev, password: e.target.value };
-                    })
-                  }
-                />
-              </div>
-              <div className="flex justify-start py-3">
-                <button
-                  type="submit"
-                  className="px-3 py-1 rounded-lg border border-gray-100 text-white"
-                >
-                  Login
-                </button>
-                <button
-                  className="px-3 py-1 rounded-lg border border-gray-100 text-white"
-                  onClick={(e) => testLoginHandler(e, email, password)}
-                >
-                  Login as Guest
-                </button>
-              </div>
-              <p className="text-white">
-                Dont have an account?{" "}
-                <span>
-                  <NavLink to="/signup">Signup</NavLink>
+            {/* <div>
+              <input
+                type="email"
+                placeholder="Email"
+                className="h-10 w-72 rounded-md p-2"
+              />
+            </div> */}
+            <div>
+              <input
+                type="text"
+                className="h-10 w-72 rounded-md p-2 text-black"
+                placeholder="Email"
+                name="email"
+                value={loginData.email}
+                onChange={(e) =>
+                  setLoginData((prev) => {
+                    return { ...prev, email: e.target.value };
+                  })
+                }
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                className="h-10 w-72 rounded-md p-2 text-black"
+                placeholder="Password"
+                name="password"
+                value={loginData.password}
+                onChange={(e) =>
+                  setLoginData((prev) => {
+                    return { ...prev, password: e.target.value };
+                  })
+                }
+              />
+            </div>
+            <div className="flex justify-around">
+              <button
+                className="bg-green-600 border-[2px] border-green-600   hover:bg-green-500 px-3 py-2 w-72 rounded-md font-semibold"
+                type="submit"
+              >
+                Login
+              </button>
+            </div>
+            <div className="flex justify-around">
+              <button
+                className="border-[2px] border-slate-400 px-3 py-2 w-72 rounded-md font-semibold hover:border-slate-100"
+                onClick={(e) => testLoginHandler(e, email, password)}
+              >
+                Login as Guest
+              </button>
+            </div>
+            <div>
+              <p className="text-center text-lg">
+                {" "}
+                Don't have an account?{" "}
+                <span className="text-blue-400 font-semibold">
+                  <NavLink to={"/signup"}>Signup </NavLink>
                 </span>
               </p>
             </div>

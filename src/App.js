@@ -19,6 +19,7 @@ import Checkout from "./pages/Checkout";
 import Order from "./pages/Order";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { RotatingLines } from "react-loader-spinner";
 
 makeServer();
 function App() {
@@ -50,8 +51,15 @@ function App() {
         pauseOnHover
         theme="light"
       />
+      {/* <RotatingLines
+        strokeColor="grey"
+        strokeWidth="5"
+        animationDuration="0.75"
+        width="96"
+        visible={true}
+      /> */}
       {/* Same as */}
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 }

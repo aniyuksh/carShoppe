@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import { useCart } from "../context/cartContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const WIshList = () => {
   const { wish, setWish } = useWish();
@@ -39,7 +40,7 @@ const WIshList = () => {
         }
       );
       setCart(data.cart);
-      console.log("cartwish", cart);
+      toast.success("Updated cart item's qty");
     } catch (e) {
       console.log(e);
     }
@@ -62,6 +63,7 @@ const WIshList = () => {
         }
       );
       setCart(data.cart);
+      toast.success("Added to cart from wishlist");
     } catch (e) {
       console.log("ADDTOCARTERROR", e);
     }

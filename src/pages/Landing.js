@@ -5,13 +5,17 @@ import { categories } from "../backend/db/categories";
 import CategoryCard from "../components/CategoryCard";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../components/footer";
+import { RotatingLines } from "react-loader-spinner";
+
 import i1 from "../../src/assets/hero-images/i1.svg";
+console.log(categories);
 const Landing = () => {
   const navigate = useNavigate();
   return (
     <>
+      {/* {categories.length < 0 && <RotatingLines />} */}
       <Navbar />
-      <div className="">
+      <div className="text-center">
         <div className="">
           <img
             src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80"
@@ -32,7 +36,7 @@ const Landing = () => {
         </div>
       </div>
       <div className="flex flex-col">
-        <div className="py-4">
+        <div className="py-4 text-center">
           <p className="text-4xl text-zinc-700 font-bold"> Categories </p>
         </div>
         <div className="flex justify-evenly my-5 max-sm:flex-col max-sm:justify-center items-center">
