@@ -69,14 +69,6 @@ const Cart = () => {
     }
   }
 
-  // if (cart.length === 0) {
-  //   return (
-  //     <div className="flex justify-center items-center h-[100vh] w-[100vw]">
-  //       <RotatingLines />
-  //     </div>
-  //   );
-  // }
-
   return (
     <>
       <Navbar />
