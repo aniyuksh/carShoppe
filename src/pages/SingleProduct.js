@@ -34,6 +34,7 @@ const SingleProduct = () => {
       console.warn("Item is Already present in cart");
       return;
     }
+    let token = localStorage.getItem("token");
     try {
       const { data } = await axios.post(
         "/api/user/cart",

@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Navbar from "../components/navbar";
-import back from "../assets/hero-images/back.svg";
-import smlogin from "../assets/hero-images/smlogin.svg";
+// import back from "../assets/hero-images/back.svg";
+// import smlogin from "../assets/hero-images/smlogin.svg";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { users } from "../backend/db/users";
 import { toast } from "react-toastify";
-import { Footer } from "../components/footer";
+// import { Footer } from "../components/footer";
 
 export const Login = () => {
   const { authDispatch } = useAuth();
